@@ -7,14 +7,38 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      lavender: {
+        DEFAULT: '#86778c'
+      },
+      rosewood: {
+        DEFAULT: '#c6939b'
+      },
+      beige: {
+        DEFAULT: '#d4b2a0'
+      },
+      white: {
+        DEFAULT: '#ffffff',
+        bride: '#faf9ee',
+      },
+      oliveGreen: {
+        DEFAULT: '#436038'
+      },
+      black: {
+        dark: '#000000',
+        DEFAULT: '#101010',
+        light: '#3f3f3f',
+      },
+    },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        parisienne: ["Parisienne", 'cursive'],
+        baskervville: ["Baskervville SC", 'serif'],
+        montserrat: ["Montserrat", 'sans-serif'],
       },
     },
   },
+
   plugins: [],
 };
 export default config;
