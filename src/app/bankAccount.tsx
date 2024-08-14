@@ -1,5 +1,5 @@
 export function BankAccount() {
-    return <section className="mx-auto w-full max-w-4xl px-8 pt-32">
+    return <section className="fade-in-container mx-auto w-full max-w-4xl px-8 pt-32">
 
         <h2 className="text-rosewood text-4xl text-center text-balance">
             Si quieres hacernos un regalo <span className="text-black-dark">estamos agradecidos</span>

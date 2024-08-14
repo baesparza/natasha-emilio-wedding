@@ -1,6 +1,6 @@
 export function Indications() {
     return <>
-        <section className="mx-auto w-full max-w-2xl px-8 py-32">
+        <section className="fade-in-container mx-auto w-full max-w-2xl px-8 py-32">
             <h2 className="text-oliveGreen text-4xl text-center text-balance ">Aquí te dejamos unas indicaciones <span className="text-black-dark">para tu asistencia...</span></h2>
 
             <div className="mt-12 flex flex-row gap-x-10 gap-y-20 flex-wrap justify-center">

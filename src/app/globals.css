@@ -4,3 +4,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* main title appearance */
+h1 {}
+
+
+
+.fade-in-container {
+    animation: fade-in-container ease-in;
+    animation-timeline: view();
+    animation-range-start: cover;
+    animation-range-end: 50svh;
+}
+
+@keyframes fade-in-container {
+    from {
+        opacity: 0;
+        transform: translatey(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translatey(0);
+    }
+}

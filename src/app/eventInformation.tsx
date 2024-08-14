@@ -1,5 +1,5 @@
 export function EventInformation() {
-    return <section className="mx-auto w-full container px-8 pt-40">
+    return <section className="fade-in-container mx-auto w-full container px-8 pt-40">
         <div className="flex flex-col md:flex-row w-full gap-8 lg:gap-16">
             {/* info */}
             <div className="w-full md:w-1/2 flex flex-col gap-6 justify-center">
