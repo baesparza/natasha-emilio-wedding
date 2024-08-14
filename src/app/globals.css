@@ -9,23 +9,32 @@
 /* main title appearance */
 h1 {}
 
-
-
 .fade-in-container {
-    animation: fade-in-container ease-in;
+    opacity: 0;
+    transform: translatey(100px);
+
+    animation: fade-in-container linear forwards;
     animation-timeline: view();
     animation-range-start: cover;
     animation-range-end: 50svh;
 }
 
 @keyframes fade-in-container {
-    from {
-        opacity: 0;
-        transform: translatey(100px);
-    }
+    0% {}
 
-    to {
+    100% {
         opacity: 1;
         transform: translatey(0);
     }
+}
+
+
+.fade-main-title {
+    opacity: 0;
+    transform: translatey(100px);
+
+    animation: fade-in-container ease-in forwards;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
 }

@@ -21,14 +21,12 @@ export function HeroVideo() {
 
             {/* content over video */}
             <div className="relative z-20 flex justify-center items-center h-full w-full">
-                <h1 className="font-parisienne text-6xl md:text-7xl lg:text-8xl text-white-bride w-full max-w-xs lg:max-w-lg px-4 py-4 text-center leading-snug">
+                <h1 className="fade-main-title font-parisienne text-6xl md:text-7xl lg:text-8xl text-white-bride w-full max-w-xs lg:max-w-lg px-4 py-4 text-center leading-snug">
                     Todas las bodas tienen una historia...
                 </h1>
             </div>
 
-
             {/* scroll */}
-
             <button onClick={scrollToNextContent} className="-translate-x-1/2 flex flex-col items-center justify-center  absolute text-white z-40 left-1/2 bottom-12">
                 <span className="animate-bounce uppercase font-montserrat text-xs font-semibold" >mas información</span>
                 <span className="material-symbols-outlined">
