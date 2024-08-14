@@ -9,11 +9,11 @@ export function BankAccount() {
             Recuerda que lo importante es que vengas con ilusión, alegría y ganas de pasarlo bien.
         </h3>
 
-        <div className="mx-auto mt-10 relative max-w-[30rem] aspect-video flex items-center justify-center">
+        <div className="mx-auto mt-10 relative max-w-[30rem] min-h-64 flex items-center justify-center">
             {/* Underlying Gradient Div */}
-            <div className="absolute w-full h-full inset-0 rounded-lg bg-gradient-to-br from-oliveGreen to-rosewood" />
+            <div className="absolute z-0 w-full h-full inset-0 rounded-lg bg-gradient-to-br from-oliveGreen to-rosewood" />
 
-            <div className="shadow-xl relative w-full h-full m-[5px] p-4 bg-white rounded-lg flex flex-col items-center justify-center ">
+            <div className="absolute z-10 w-[calc(100%-10px)] h-[calc(100%-10px)] inset-[5px] shadow-xl p-4 bg-white rounded-lg flex flex-col items-center justify-center ">
                 <h2 className="text-xl font-medium">
                     Cta Ahorros Banco de Guayaquil
                 </h2>
