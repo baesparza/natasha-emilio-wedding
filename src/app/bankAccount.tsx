@@ -1,5 +1,5 @@
 export function BankAccount() {
-    return <section className="fade-in-container mx-auto w-full max-w-4xl px-8 pt-32">
+    return <section className="fade-in-container mx-auto w-full max-w-4xl px-8 pt-32 pb-20">
 
         <h2 className="text-rosewood text-4xl text-center text-balance">
             Si quieres hacernos un regalo <span className="text-black-dark">estamos agradecidos</span>
@@ -9,42 +9,48 @@ export function BankAccount() {
             Recuerda que lo importante es que vengas con ilusión, alegría y ganas de pasarlo bien.
         </h3>
 
-        <div className="mx-auto mt-10 relative max-w-[30rem] h-100   min-h-64 flex items-center justify-center">
-            {/* Underlying Gradient Div */}
-            <div className="absolute z-0 w-full h-full inset-0 rounded-lg bg-gradient-to-br from-oliveGreen to-rosewood" />
+        {/* card */}
+        <div className="relative mt-10">
+            <div className=" mx-auto relative max-w-[30rem] h-100 min-h-64 flex items-center justify-center">
+                {/* Underlying Gradient Div */}
+                <div className="absolute z-0 w-full h-full inset-0 rounded-lg bg-gradient-to-br from-oliveGreen to-rosewood" />
 
-            <div className="absolute z-10 w-[calc(100%-10px)] h-[calc(100%-10px)] inset-[5px] shadow-xl py-20 px-4 bg-white rounded-lg flex flex-col items-center justify-center ">
-                <h2 className="text-xl font-medium text-balance text-center">
-                    Cta Ahorros Banco de Guayaquil
-                </h2>
+                <div className="absolute z-10 w-[calc(100%-10px)] h-[calc(100%-10px)] inset-[5px] shadow-xl py-20 px-4 bg-white rounded-lg flex flex-col items-center justify-center ">
+                    <h2 className="text-xl font-medium text-balance text-center">
+                        Cta Ahorros Banco de Guayaquil
+                    </h2>
 
-                <p className="mt-4 text-lg">
-                    Nro Cuenta: <b>0049020907</b>
-                </p>
-                <small className="mt-1 text-base">
-                    Cta compartida
-                </small>
+                    <p className="mt-4 text-lg">
+                        Nro Cuenta: <b>0049020907</b>
+                    </p>
+                    <small className="mt-1 text-base">
+                        Cta compartida
+                    </small>
 
-                <div className="mt-5 flex items-center justify-center gap-4">
-                    <div className="text-center">
-                        <b>Natasha Beltran</b>
-                        <p>
-                            Cl: 1104832934
-                        </p>
-                    </div>
+                    <div className="mt-5 flex items-center justify-center gap-4">
+                        <div className="text-center">
+                            <b>Natasha Beltran</b>
+                            <p>
+                                Cl: 1104832934
+                            </p>
+                        </div>
 
-                    <div className="text-3xl font-baskervville text-rosewood">
-                        &
-                    </div>
+                        <div className="text-3xl font-baskervville text-rosewood">
+                            &
+                        </div>
 
-                    <div className="text-center">
-                        <b>Emilio Sanchez</b>
-                        <p>
-                            Cl: 1104633373
-                        </p>
+                        <div className="text-center">
+                            <b>Emilio Sanchez</b>
+                            <p>
+                                Cl: 1104633373
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            {/* assets */}
+            <img className="z-0 absolute left-0 bottom-0 scale-x-[-1] " src="/flowers/bottom-left-leaf.png" alt="" />
         </div>
     </section>;
 }

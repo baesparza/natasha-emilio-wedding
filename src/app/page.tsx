@@ -16,11 +16,12 @@ export default function Home() {
         <div className="mt-[100svh]"></div>
 
       
-        {/* <img src="/flowers/bottom-left-leaf.png" alt="" />
-        <img src="/flowers/cut-right-plan-flipped.png" alt="" />
-        <img src="/flowers/rose.png" alt="" />
-        <img src="/flowers/single-leaf-2.png" alt="" />
+        {/* <img src="/flowers/cut-right-plan-flipped.png" alt="" /> */}
+
+
+        {/* <img src="/flowers/single-leaf-2.png" alt="" />
         <img src="/flowers/single-leaf.png" alt="" /> */}
+
 
         {/* direction */}
         <EventInformation />
