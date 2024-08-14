@@ -46,6 +46,6 @@ export function EventInformation() {
         </div>
 
         {/* assets */}
-        <img className="z-0 absolute left-0 top-0 w-1/2 md:w-1/3 lg:w-1/4 max-w-64s blur opacity-30 md:opacity-50" src="/flowers/top-right-leaf.png" alt="" />
+        <img className="z-0 absolute left-0 top-12 w-1/2 md:w-1/3 lg:w-1/4 max-w-64s blur opacity-20 md:opacity-30" src="/flowers/top-right-leaf.png" alt="" />
     </section>;
 }

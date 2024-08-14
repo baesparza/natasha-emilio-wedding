@@ -20,8 +20,7 @@ export default function Home() {
         <img src="/flowers/cut-right-plan-flipped.png" alt="" />
         <img src="/flowers/rose.png" alt="" />
         <img src="/flowers/single-leaf-2.png" alt="" />
-        <img src="/flowers/single-leaf.png" alt="" />
-        <img src="/flowers/thin-plant.png" alt="" /> */}
+        <img src="/flowers/single-leaf.png" alt="" /> */}
 
         {/* direction */}
         <EventInformation />
