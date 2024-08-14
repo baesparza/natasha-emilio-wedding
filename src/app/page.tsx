@@ -1,3 +1,4 @@
+import { BankAccount } from "./bankAccount";
 import { ConfirmInvitation } from "./confirmInvitation";
 import { EventInformation } from "./eventInformation";
 import { Indications } from "./indications";
@@ -37,7 +38,8 @@ export default function Home() {
         {/* indications */}
         <Indications />
 
-        {/* gifts */}
+        {/* banking info */}
+        <BankAccount />
 
         {/* invitation */}
         <ConfirmInvitation />

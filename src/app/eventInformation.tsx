@@ -1,5 +1,5 @@
 export function EventInformation() {
-    return <section className="mx-auto w-full container px-8 py-32">
+    return <section className="mx-auto w-full container px-8 pt-40">
         <div className="flex flex-col md:flex-row w-full gap-8 lg:gap-16">
             {/* info */}
             <div className="w-full md:w-1/2 flex flex-col gap-6 justify-center">
@@ -28,14 +28,14 @@ export function EventInformation() {
             {/* image */}
             <div className="w-full md:w-1/2">
                 {/* carrusel */}
-                <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-sm" href="https://maps.app.goo.gl/38Djo53GSzVrhwQZA" target="_blank" rel="noopener noreferrer">
+                <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-md" href="https://maps.app.goo.gl/38Djo53GSzVrhwQZA" target="_blank" rel="noopener noreferrer">
                     {/* image */}
                     <img src="/assets/mapa.png" alt="Mapa ubicación" className="absolute z-0 inset-0 w-full h-full object-cover group-hover:scale-125 transition-transform" />
 
                     <div className="absolute z-10 inset-0 w-full h-full bg-gradient-to-b from-white to-black-light opacity-5" />
 
                     {/* button */}
-                    <div className="absolute z-20 bottom-4 left-4 bg-white px-2 rounded-md  transition-all shadow-lg group-hover:shadow-sm group-hover:translate-y-1 text-rosewood group-hover:text-black-light" >
+                    <div className="absolute z-20 bottom-4 left-4 bg-white px-2 rounded-lg transition-all shadow-lg group-hover:shadow-sm group-hover:translate-y-1 text-rosewood group-hover:text-black-light" >
                         <span className="flex flex-row gap-1 items-center justify-start font-semibold uppercase text-sm ">
                             <span className="material-symbols-outlined text-lg">link</span>
                             <span>Ver en Google Maps</span>
