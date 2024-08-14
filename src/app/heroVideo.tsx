@@ -6,7 +6,7 @@ function scrollToNextContent() {
 
 
 export function HeroVideo() {
-    return <header className="fixed inset-0 z-0 w-screen h-screen">
+    return <header className="fixed inset-0 z-0 w-screen h-dvh">
         <div className="relative w-full h-full">
             {/* logo */}
             <img src="/assets/logo.jpg" alt="" className="fixed top-0 left-0 z-30 w-40 md:w-52 lg:w-64 h-auto mix-blend-color-dodge invert -ml-10 mt-4" />
