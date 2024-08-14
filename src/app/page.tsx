@@ -15,7 +15,13 @@ export default function Home() {
         {/* spacer */}
         <div className="mt-[100svh]"></div>
 
-            {/* <img src="/assets/logo.jpg" alt="" className="sticky z-50 top-0 left-0  w-16 h-28 object-cover mix-blend-multiply bg-white" /> */}
+      
+        {/* <img src="/flowers/bottom-left-leaf.png" alt="" />
+        <img src="/flowers/cut-right-plan-flipped.png" alt="" />
+        <img src="/flowers/rose.png" alt="" />
+        <img src="/flowers/single-leaf-2.png" alt="" />
+        <img src="/flowers/single-leaf.png" alt="" />
+        <img src="/flowers/thin-plant.png" alt="" /> */}
 
         {/* direction */}
         <EventInformation />

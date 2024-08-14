@@ -1,6 +1,6 @@
 export function EventInformation() {
-    return <section className="fade-in-container mx-auto w-full container px-8 pt-40">
-        <div className="flex flex-col md:flex-row w-full gap-8 lg:gap-16">
+    return <section className="fade-in-container relative ">
+        <div className="relative z-10 mx-auto w-full container px-8 pt-40 flex flex-col md:flex-row gap-8 lg:gap-16">
             {/* info */}
             <div className="w-full md:w-1/2 flex flex-col gap-6 justify-center">
                 <h2 className="text-oliveGreen text-4xl text-balance ">Nos complace invitarte <span className="text-black-dark">a nuestra boda,</span></h2>
@@ -44,5 +44,8 @@ export function EventInformation() {
                 </a>
             </div>
         </div>
+
+        {/* assets */}
+        <img className="z-0 absolute left-0 top-0 w-1/2 md:w-1/3 lg:w-1/4 max-w-64s blur opacity-30 md:opacity-50" src="/flowers/top-right-leaf.png" alt="" />
     </section>;
 }
