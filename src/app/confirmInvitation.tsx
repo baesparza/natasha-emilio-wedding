@@ -1,5 +1,5 @@
 export function ConfirmInvitation() {
-    return <footer className="w-screen h-dvh flex flex-col justify-center items-center gap-12">
+    return <footer className="w-screen h-svh flex flex-col justify-center items-center gap-12">
         <h3 className="flex flex-col justify-center font-parisienne text-6xl text-black-light w-fit">
             <span className="-ml-12"><span className="text-rosewood text-8xl">T</span><span className="-ml-2">e</span></span>
             <span className="-mt-3">invitamos</span>

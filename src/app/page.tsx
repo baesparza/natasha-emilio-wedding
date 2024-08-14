@@ -13,7 +13,7 @@ export default function Home() {
       <main className="relative z-20 bg-white">
 
         {/* spacer */}
-        <div className="mt-[100dvh]"></div>
+        <div className="mt-[100svh]"></div>
 
             {/* <img src="/assets/logo.jpg" alt="" className="sticky z-50 top-0 left-0  w-16 h-28 object-cover mix-blend-multiply bg-white" /> */}
 
