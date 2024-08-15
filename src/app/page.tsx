@@ -14,14 +14,8 @@ export default function Home() {
 
         {/* spacer */}
         <div className="mt-[100svh]"></div>
-
       
         {/* <img src="/flowers/cut-right-plan-flipped.png" alt="" /> */}
-
-
-        {/* <img src="/flowers/single-leaf-2.png" alt="" />
-        <img src="/flowers/single-leaf.png" alt="" /> */}
-
 
         {/* direction */}
         <EventInformation />
@@ -34,6 +28,14 @@ export default function Home() {
 
         {/* invitation */}
         <ConfirmInvitation />
+
+        {/* assets */}
+        <img className="fall-leaf -z-10 blur absolute top-[22%] left-20" src="/flowers/single-leaf-2.png" alt="" />
+        <img className="fall-leaf -z-10 blur absolute top-[20%] right-20" src="/flowers/single-leaf.png" alt="" />
+        <img className="fall-leaf -z-10 blur absolute top-[40%] left-32" src="/flowers/single-leaf.png" alt="" />
+        <img className="fall-leaf -z-10 blur absolute top-[45%] right-16" src="/flowers/single-leaf.png" alt="" />
+        <img className="fall-leaf -z-10 blur absolute top-[75%] left-4" src="/flowers/single-leaf-2.png" alt="" />
+        <img className="fall-leaf -z-10 blur absolute top-[80%] right-20" src="/flowers/single-leaf.png" alt="" />
       </main>
     </>
   );

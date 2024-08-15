@@ -38,3 +38,21 @@ h1 {}
     animation-delay: 1s;
     animation-fill-mode: forwards;
 }
+
+
+.fall-leaf {
+    opacity: 0;
+    transform: translatey(-500px);
+
+    animation: fall-leaf linear forwards;
+    animation-timeline: scroll();
+}
+
+@keyframes fall-leaf {
+    0% {}
+
+    100% {
+        opacity: 1;
+        transform: translatey(500px);
+    }
+}
