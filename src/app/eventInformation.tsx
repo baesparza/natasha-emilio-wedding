@@ -4,7 +4,7 @@ export function EventInformation() {
             {/* info */}
             <div className="w-full md:w-3/5 flex flex-col gap-10 justify-center">
                 <h2 className="text-black-dark text-4xl text-balance italic text-center mb-20 lg:text-left lg:mb-10">
-                    "Amamos la vida, no por el habito de vivir sino por el habito de amar."
+                    &quot;Amamos la vida, no por el habito de vivir sino por el habito de amar&quot;
                     <span className="block text-oliveGreen text-2xl text-balance ">
                         Natasha & Emilio
                     </span>
@@ -14,7 +14,7 @@ export function EventInformation() {
                     Nos complace invitarte <span className="text-oliveGreen">a nuestra boda</span>
                 </h2>
 
-                <h3 className="text-black text-left w-full text-lg lg:text-xl text-balance font-light text-center lg:text-left">
+                <h3 className="text-black w-full text-lg lg:text-xl text-balance font-light text-center lg:text-left">
                     Por favor no llegues tarde, y planifica tu llegada, habrá estacionamiento cerca para que puedas dejar tu vehículo.
                 </h3>
 
