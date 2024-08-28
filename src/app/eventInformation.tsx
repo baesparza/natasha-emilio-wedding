@@ -1,32 +1,58 @@
 export function EventInformation() {
     return <section className="fade-in-container relative ">
-        <div className="relative z-10 mx-auto w-full container px-8 pt-40 flex flex-col md:flex-row gap-8 lg:gap-16">
+        <div className="relative z-10 mx-auto w-full container px-8 pt-32 flex flex-col md:flex-row gap-8 lg:gap-16">
             {/* info */}
-            <div className="w-full md:w-1/2 flex flex-col gap-6 justify-center">
-                <h2 className="text-oliveGreen text-4xl text-balance ">Nos complace invitarte <span className="text-black-dark">a nuestra boda,</span></h2>
+            <div className="w-full md:w-3/5 flex flex-col gap-10 justify-center">
+                <h2 className="text-black-dark text-4xl text-balance italic text-center mb-20 lg:text-left lg:mb-10">
+                    "Amamos la vida, no por el habito de vivir sino por el habito de amar."
+                    <span className="block text-oliveGreen text-2xl text-balance ">
+                        Natasha & Emilio
+                    </span>
+                </h2>
 
-                <h3 className="text-black text-left w-full text-lg lg:text-xl text-balance font-light">
-                    Te esperaremos en nuestro lugar especial, por favor no llegues tarde, y planifica tu llegada, habrá estacionamiento cerca para que puedas dejar tu vehículo.
+                <h2 className="text-black-dark text-4xl text-balance text-center lg:text-left">
+                    Nos complace invitarte <span className="text-oliveGreen">a nuestra boda</span>
+                </h2>
+
+                <h3 className="text-black text-left w-full text-lg lg:text-xl text-balance font-light text-center lg:text-left">
+                    Por favor no llegues tarde, y planifica tu llegada, habrá estacionamiento cerca para que puedas dejar tu vehículo.
                 </h3>
 
-                <p className="text-lg flex flex-col gap-1">
-                    <span className="flex flex-row gap-1 items-center ">
-                        <span className="material-symbols-outlined text-lg text-oliveGreen">location_on</span>
-                        <b className="font-semibold uppercase text-base text-oliveGreen">Lugar</b>
-                    </span>
-                    <span className="text-black-light flex-grow ">Landangui, via a Vilcabamba, Loja - Ecuador</span>
-                </p>
-                <p className="text-lg flex flex-col gap-1">
-                    <span className="flex flex-row gap-1 items-center ">
-                        <span className="material-symbols-outlined text-lg text-oliveGreen">event</span>
-                        <b className="font-semibold uppercase text-base text-oliveGreen">Fecha</b>
-                    </span>
-                    <span className="text-black-light flex-grow">18 de octubre, 2024</span>
-                </p>
+                <br />
+
+                <div className="flex flex-row gap-4 items items-start">
+                    <p className="grow flex flex-col gap-1">
+                        <span className="flex flex-row gap-1 items-center justify-center">
+                            {/* <span className="material-symbols-outlined text-lg text-oliveGreen">location_on</span> */}
+                            <b className="font-baskervville font-semibold uppercase text-base text-oliveGreen">Lugar</b>
+                        </span>
+                        <span className="text-black-light text-center text-sm lg:text-base ">El Sauce, Landangui <br /> via a Malacatos</span>
+                    </p>
+
+                    <div className="shrink-0 h-20 w-0.5 rounded bg-rosewood self-center" />
+
+                    <p className="grow flex flex-col gap-1">
+                        <span className="flex flex-row gap-1 items-center justify-center">
+                            {/* <span className="material-symbols-outlined text-lg text-oliveGreen">event</span> */}
+                            <b className="font-baskervville font-semibold uppercase text-base text-oliveGreen">Fecha</b>
+                        </span>
+                        <span className="text-black-light text-center text-sm lg:text-base">19 de octubre, 2024</span>
+                    </p>
+
+                    <div className="shrink-0 h-20 w-0.5 rounded bg-rosewood self-center" />
+
+                    <p className="grow flex flex-col gap-1">
+                        <span className="flex flex-row gap-1 items-center justify-center">
+                            {/* <span className="material-symbols-outlined text-lg text-oliveGreen">watch</span> */}
+                            <b className="font-baskervville font-semibold uppercase text-base text-oliveGreen">Hora</b>
+                        </span>
+                        <span className="text-black-light text-center text-sms lg:text-base">Ceremonia: 4h00 PM <br /> Recepción: 5h30 PM</span>
+                    </p>
+                </div>
             </div>
 
             {/* image */}
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-2/5">
                 {/* carrusel */}
                 <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-3xl" href="https://maps.app.goo.gl/38Djo53GSzVrhwQZA" target="_blank" rel="noopener noreferrer">
                     {/* image */}

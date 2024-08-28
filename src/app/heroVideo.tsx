@@ -22,7 +22,7 @@ export function HeroVideo() {
             {/* content over video */}
             <div className="relative z-20 flex justify-center items-center h-full w-full">
                 <h1 className="fade-main-title font-parisienne text-6xl md:text-7xl lg:text-8xl text-white-bride w-full max-w-xs lg:max-w-lg px-4 py-4 text-center leading-snug">
-                    Todas las bodas tienen una historia...
+                    Todas las bodas tienen una historia, forma parte de ella
                 </h1>
             </div>
 
