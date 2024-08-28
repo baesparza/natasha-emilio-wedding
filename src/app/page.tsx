@@ -40,7 +40,7 @@ export default function Home() {
         ${
           showModal
             ? <div className="sticky bottom-0 w-full left-0 right-0  bg-white z-50  shadow-[rgba(0,_0,_0,_0.25)_0px_0.0625em_0.0625em,_rgba(0,_0,_0,_0.25)_0px_0.125em_0.5em,_rgba(255,_255,_255,_0.1)_0px_0px_0px_1px_inset]">
-              <div className="container mx-auto px-4 py-6 flex flex-row justify-between gap-6">
+              <div className="container mx-auto px-4 py-6 flex flex-row justify-between gap-6 items-center">
                 <span className="font-semibold text-sm">
                   No te olvides confirmar tu asistencia llenando el formulario al final de la página.
                 </span>

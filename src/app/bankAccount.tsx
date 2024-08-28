@@ -29,7 +29,7 @@ export function BankAccount() {
 
                     <div className="mt-5 flex items-center justify-center gap-4">
                         <div className="text-center">
-                            <b>Natasha Beltran</b>
+                            <b>Natasha Beltrán</b>
                             <p>
                                 Cl: 1104832934
                             </p>
@@ -40,7 +40,7 @@ export function BankAccount() {
                         </div>
 
                         <div className="text-center">
-                            <b>Emilio Sanchez</b>
+                            <b>Emilio Sánchez</b>
                             <p>
                                 Cl: 1104633373
                             </p>
