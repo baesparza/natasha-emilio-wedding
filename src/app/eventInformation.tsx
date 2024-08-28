@@ -54,7 +54,7 @@ export function EventInformation() {
             {/* image */}
             <div className="w-full md:w-2/5">
                 {/* carrusel */}
-                <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-3xl" href="https://maps.app.goo.gl/38Djo53GSzVrhwQZA" target="_blank" rel="noopener noreferrer">
+                <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-3xl" href="https://maps.app.goo.gl/hTtNPkG9gy8kPds87" target="_blank" rel="noopener noreferrer">
                     {/* image */}
                     <img src="/assets/mapa.png" alt="Mapa ubicación" className="absolute z-0 inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" />
 
