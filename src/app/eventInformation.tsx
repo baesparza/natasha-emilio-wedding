@@ -1,30 +1,27 @@
+
 export function EventInformation() {
+
     return <section className="fade-in-container relative ">
         <div className="relative z-10 mx-auto w-full container px-8 pt-32 flex flex-col md:flex-row gap-8 lg:gap-16">
             {/* info */}
-            <div className="w-full md:w-3/5 flex flex-col gap-10 justify-center">
-                <h2 className="text-black-dark text-4xl text-balance italic text-center mb-20 lg:text-left lg:mb-10">
+            <div className="w-full md:w-3/5 flex flex-col gap-10 justify-center items-center">
+                <h2 className="text-black-dark text-3xl text-balance italic text-center">
                     &quot;Amamos la vida, no por el habito de vivir sino por el habito de amar&quot;
-                    <span className="block text-oliveGreen text-2xl text-balance ">
-                        Natasha & Emilio
-                    </span>
                 </h2>
 
-                <h2 className="text-black-dark text-4xl text-balance text-center lg:text-left">
+                <h2 className="block text-oliveGreen text-3xl text-balance text-center">
+                    Natasha & Emilio
+                </h2>
+
+                <h2 className="text-black-dark text-3xl text-balance text-center">
                     Nos complace invitarte <span className="text-oliveGreen">a nuestra boda</span>
                 </h2>
 
-                <h3 className="text-black w-full text-lg lg:text-xl text-balance font-light text-center lg:text-left">
-                    Por favor no llegues tarde, y planifica tu llegada, habrá estacionamiento cerca para que puedas dejar tu vehículo.
-                </h3>
-
-                <br />
-
-                <div className="flex flex-row gap-4 items items-start">
+                <div className="w-full flex flex-row gap-4 items items-start">
                     <p className="grow flex flex-col gap-1">
                         <span className="flex flex-row gap-1 items-center justify-center">
                             {/* <span className="material-symbols-outlined text-lg text-oliveGreen">location_on</span> */}
-                            <b className="font-baskervville font-semibold uppercase text-base text-oliveGreen">Lugar</b>
+                            <b className="font-baskervville font-semibold uppercase text-lg text-oliveGreen">Lugar</b>
                         </span>
                         <span className="text-black-light text-center text-sm lg:text-base ">El Sauce, Landangui <br /> via a Malacatos</span>
                     </p>
@@ -34,7 +31,7 @@ export function EventInformation() {
                     <p className="grow flex flex-col gap-1">
                         <span className="flex flex-row gap-1 items-center justify-center">
                             {/* <span className="material-symbols-outlined text-lg text-oliveGreen">event</span> */}
-                            <b className="font-baskervville font-semibold uppercase text-base text-oliveGreen">Fecha</b>
+                            <b className="font-baskervville font-semibold uppercase text-lg text-oliveGreen">Fecha</b>
                         </span>
                         <span className="text-black-light text-center text-sm lg:text-base">19 de octubre, 2024</span>
                     </p>
@@ -44,10 +41,26 @@ export function EventInformation() {
                     <p className="grow flex flex-col gap-1">
                         <span className="flex flex-row gap-1 items-center justify-center">
                             {/* <span className="material-symbols-outlined text-lg text-oliveGreen">watch</span> */}
-                            <b className="font-baskervville font-semibold uppercase text-base text-oliveGreen">Hora</b>
+                            <b className="font-baskervville font-semibold uppercase text-lg text-oliveGreen">Hora</b>
                         </span>
                         <span className="text-black-light text-center text-sms lg:text-base">Ceremonia: 4h00 PM <br /> Recepción: 5h30 PM</span>
                     </p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-start">
+                    <p className="flex flex-row gap-1 items-center  text-oliveGreen font-semibold uppercase text-sm ">
+                        Te recomendamos las siguientes hospedajes
+                    </p>
+
+                    <div className="border-x-[0.125rem] border-rosewood mx-5 px-6 flex flex-col gap-2">
+                        <p>
+                            Hostería mi compadre, <a href="tel:+0991113496">099 111 3496</a>
+                        </p>
+
+                        <p>
+                            Hotel Villa Colonial, <a href="tel:+0989985952">098 998 5952</a>
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -72,6 +85,6 @@ export function EventInformation() {
         </div>
 
         {/* assets */}
-        <img className="z-0 absolute left-0 top-12 w-1/2 md:w-1/3 lg:w-1/4 max-w-64s blur opacity-20 md:opacity-30" src="/flowers/top-right-leaf.png" alt="" />
+        <img className="z-0 absolute left-0 top-12 w-1/2 md:w-1/3 lg:w-1/4 max-w-64s blur opacity-10 md:opacity-20" src="/flowers/top-right-leaf.png" alt="" />
     </section>;
 }
