@@ -49,7 +49,7 @@ export function EventInformation() {
 
                 <div className="flex flex-col gap-2 items-start">
                     <p className="flex flex-row gap-1 items-center  text-oliveGreen font-semibold uppercase text-sm ">
-                        Te recomendamos las siguientes hospedajes
+                        Te recomendamos los siguientes hospedajes
                     </p>
 
                     <div className="border-x-[0.125rem] border-rosewood mx-5 px-6 flex flex-col gap-2">

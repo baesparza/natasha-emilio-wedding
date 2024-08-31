@@ -13,7 +13,7 @@ export function HeroVideo() {
 
             {/* video */}
             <video autoPlay={true} muted={true} loop={true} playsInline={true} className="z-0 absolute inset-0 w-full h-full object-cover">
-                <source src="/assets/intro.mp4" type="video/mp4" />
+                <source src="https://firebasestorage.googleapis.com/v0/b/labs-63faf.appspot.com/o/IMG_0.mp4?alt=media&token=9cb12d00-51a7-4788-afbf-40bd6b5c0917" type="video/mp4" />
             </video>
 
             {/* overlay */}
