@@ -13,7 +13,7 @@ export function HeroVideo() {
 
             {/* video */}
             <video autoPlay={true} muted={true} loop={true} playsInline={true} className="z-0 absolute inset-0 w-full h-full object-cover">
-                <source src="https://firebasestorage.googleapis.com/v0/b/labs-63faf.appspot.com/o/IMG_0.mp4?alt=media&token=9cb12d00-51a7-4788-afbf-40bd6b5c0917" type="video/mp4" />
+                <source src="https://firebasestorage.googleapis.com/v0/b/labs-63faf.appspot.com/o/08870d47aa8346b88929f64ebccb36a8.mp4?alt=media&token=f73521b0-97ef-4db8-a9dd-b078a09326e3" type="video/mp4" />
             </video>
 
             {/* overlay */}
