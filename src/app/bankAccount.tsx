@@ -50,7 +50,7 @@ export function BankAccount() {
             </div>
 
             {/* assets */}
-            <img className="z-0 absolute left-0 bottom-0 scale-x-[-1] " src="/flowers/bottom-left-leaf.png" alt="" />
         </div>
+            <img className="w-full max-w-sm -z-10 absolute left-0 top-20 md:top-auto md:bottom-0 scale-x-[-1] rotate-90 md:-translate-x-1/2 blur md:blur-none opacity-20 md:opacity-100" src="/flowers/lavender.png" alt="" />
     </section>;
 }

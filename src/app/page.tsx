@@ -53,7 +53,7 @@ export default function Home() {
         }
 
         {/* assets */}
-        <img className="fall-leaf -z-10 blur absolute top-[22%] left-20" src="/flowers/single-leaf-2.png" alt="" />
+        <img className="fall-leaf -z-10 blur absolute top-[10%] left-20" src="/flowers/single-leaf-2.png" alt="" />
         <img className="fall-leaf -z-10 blur absolute top-[20%] right-20" src="/flowers/single-leaf.png" alt="" />
         <img className="fall-leaf -z-10 blur absolute top-[40%] left-32" src="/flowers/single-leaf.png" alt="" />
         <img className="fall-leaf -z-10 blur absolute top-[45%] right-16" src="/flowers/single-leaf.png" alt="" />

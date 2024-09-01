@@ -45,7 +45,7 @@ function verificarCedula(cedula: string): boolean {
 
 export function ConfirmInvitation() {
 
-    const [id, setId] = useState("");
+    const [phone, setPhone] = useState("");
     const [name, setName] = useState("");
     const [validationError, setValidation] = useState("");
     const [successError, setSuccess] = useState(false);
@@ -59,10 +59,8 @@ export function ConfirmInvitation() {
         /// validations
         if (name.length < 3)
             error = 'Por favor completa el nombre correctamente.';
-        else if (id.length < 10)
-            error = 'Por favor verifica que la cédula tenga 10 caracteres.';
-        else if (!verificarCedula(id))
-            error = 'Ingresa una cédula valida.';
+        else if (phone.length !==10)
+            error = 'Por favor verifica que el teléfono tenga 10 caracteres.';
 
         setValidation(error);
 
@@ -71,16 +69,15 @@ export function ConfirmInvitation() {
         }
 
         /// save
-        await saveConfirmation(id, name);
+        await saveConfirmation(phone, name);
         setSuccess(true)
     };
 
 
-    return <footer className="relative w-screen h-svh flex flex-col justify-center items-center gap-12">
+    return <footer className="relative w-screen min-h-[70svh] flex flex-col justify-center items-center gap-12">
         <h3 className="relative z-10 flex flex-col justify-center font-parisienne text-6xl text-black-light w-fit">
             <span className="-ml-12"><span className="text-rosewood text-8xl">T</span><span className="-ml-2">e</span></span>
             <span className="-mt-3">invitamos</span>
-            <span className="-mt-2" >a ti</span>
             <span className="-mt-2 text-2xl self-end">a nuestra boda</span>
         </h3>
 
@@ -105,11 +102,11 @@ export function ConfirmInvitation() {
 
                             {/* ID Input */}
                             <div className="flex flex-col gap-1 items-start max-w-screen-sm w-full">
-                                <label className="text-sm font-semibold">Cédula:</label>
+                                <label className="text-sm font-semibold">Teléfono:</label>
                                 <input
                                     type="text"
-                                    value={id}
-                                    onChange={(event) => setId(event.target.value)}
+                                    value={phone}
+                                    onChange={(event) => setPhone(event.target.value)}
                                     className="w-full border-2 border-rosewood rounded-md px-4 py-1"
                                 />
                             </div>
@@ -117,7 +114,7 @@ export function ConfirmInvitation() {
 
 
                         {/* Submit Button */}
-                        <button type="submit" className="relative z-10 shadow-[0px_0px_5px_rgba(0,0,0,0.2)] text-black-light w-fit px-10 py-4 text-sm uppercase hover:bg-lavender hover:text-white  transition-colors duration-200">
+                        <button type="submit" className="relative z-10 shadow-[0px_0px_5px_rgba(0,0,0,0.2)] text-black-light w-fit px-10 py-4 text-sm uppercase bg-white hover:bg-lavender hover:text-white  transition-colors duration-200">
                             Confirma tu asistencia
                         </button>
 

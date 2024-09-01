@@ -5,19 +5,19 @@ export function EventInformation() {
         <div className="relative z-10 mx-auto w-full container px-8 pt-32 flex flex-col md:flex-row gap-8 lg:gap-16">
             {/* info */}
             <div className="w-full md:w-3/5 flex flex-col gap-10 justify-center items-center">
-                <h2 className="text-black-dark text-3xl text-balance italic text-center">
-                    &quot;Amamos la vida, no por el habito de vivir sino por el habito de amar&quot;
+                <h2 className="text-black-light text-lg md:text-2xl text-balance italic text-center ">
+                    &quot;Amamos la vida, no por el hábito de vivir sino por el hábito de amar&quot;
                 </h2>
 
-                <h2 className="block text-oliveGreen text-3xl text-balance text-center">
-                    Natasha & Emilio
+                <h2 className="block text-oliveGreen text-4xl text-balance text-center font-baskervville italic">
+                    <span className="text-lavender">NATASHA &</span> EMILIO
                 </h2>
 
-                <h2 className="text-black-dark text-3xl text-balance text-center">
+                <h2 className="text-black-dark text-2xl text-balance text-center">
                     Nos complace invitarte <span className="text-oliveGreen">a nuestra boda</span>
                 </h2>
 
-                <div className="w-full flex flex-row gap-4 items items-start">
+                <div className="w-full flex flex-col md:flex-row gap-6 items items-center md:text-start">
                     <p className="grow flex flex-col gap-1">
                         <span className="flex flex-row gap-1 items-center justify-center">
                             {/* <span className="material-symbols-outlined text-lg text-oliveGreen">location_on</span> */}
@@ -26,7 +26,7 @@ export function EventInformation() {
                         <span className="text-black-light text-center text-sm lg:text-base ">El Sauce, Landangui <br /> via a Malacatos</span>
                     </p>
 
-                    <div className="shrink-0 h-20 w-0.5 rounded bg-rosewood self-center" />
+                    <div className="hidden md:block shrink-0 h-20 w-0.5 rounded bg-rosewood self-center" />
 
                     <p className="grow flex flex-col gap-1">
                         <span className="flex flex-row gap-1 items-center justify-center">
@@ -36,7 +36,7 @@ export function EventInformation() {
                         <span className="text-black-light text-center text-sm lg:text-base">19 de octubre, 2024</span>
                     </p>
 
-                    <div className="shrink-0 h-20 w-0.5 rounded bg-rosewood self-center" />
+                    <div className="hidden md:block shrink-0 h-20 w-0.5 rounded bg-rosewood self-center" />
 
                     <p className="grow flex flex-col gap-1">
                         <span className="flex flex-row gap-1 items-center justify-center">
@@ -47,18 +47,18 @@ export function EventInformation() {
                     </p>
                 </div>
 
-                <div className="flex flex-col gap-2 items-start">
-                    <p className="flex flex-row gap-1 items-center  text-oliveGreen font-semibold uppercase text-sm ">
+                <div className="flex flex-col gap-4 items-start mt-8">
+                    <p className="text-center text-oliveGreen font-semibold uppercase text-sm ">
                         Te recomendamos los siguientes hospedajes
                     </p>
 
-                    <div className="border-x-[0.125rem] border-rosewood mx-5 px-6 flex flex-col gap-2">
-                        <p>
-                            Hostería mi compadre, <a href="tel:+0991113496">099 111 3496</a>
+                    <div className="md:border-x-[0.125rem] border-rosewood mx-5 px-6 flex flex-col gap-3">
+                        <p className="uppercase">
+                            Hostería mi compadre, <a className="underline whitespace-nowrap" href="tel:+0991113496">099 111 3496</a>
                         </p>
 
-                        <p>
-                            Hotel Villa Colonial, <a href="tel:+0989985952">098 998 5952</a>
+                        <p className="uppercase">
+                            Hotel Villa Colonial, <a className="underline whitespace-nowrap" href="tel:+0989985952">098 998 5952</a>
                         </p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ export function EventInformation() {
             {/* image */}
             <div className="w-full md:w-2/5">
                 {/* carrusel */}
-                <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-3xl" href="https://maps.app.goo.gl/hTtNPkG9gy8kPds87" target="_blank" rel="noopener noreferrer">
+                <a className="relative block bg-lavender w-full aspect-square md:h-full lg:aspect-square overflow-hidden group rounded-2xl" href="https://maps.app.goo.gl/hTtNPkG9gy8kPds87" target="_blank" rel="noopener noreferrer">
                     {/* image */}
                     <img src="/assets/mapa.png" alt="Mapa ubicación" className="absolute z-0 inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" />
 
