@@ -37,6 +37,12 @@ export default function Home() {
         {/* invitation */}
         <ConfirmInvitation />
 
+        <div className="mx-auto px-4 py-1 bg-lavender text-white w-full text-center">
+          <small>
+            Por Bruno Esparza, y Jonathan Solórzano, Derechos reservados, 2024. Contáctanos <a className="underline" href="tel:+0992620353">099 262 0353</a>
+          </small>
+        </div>
+
         {
           showModal
             ? <div className="sticky bottom-0 w-full left-0 right-0  bg-white z-50  shadow-[rgba(0,_0,_0,_0.25)_0px_0.0625em_0.0625em,_rgba(0,_0,_0,_0.25)_0px_0.125em_0.5em,_rgba(255,_255,_255,_0.1)_0px_0px_0px_1px_inset]">
@@ -51,6 +57,7 @@ export default function Home() {
             </div>  // true
             : <></> // False
         }
+
 
         {/* assets */}
         <img className="fall-leaf -z-10 blur absolute top-[10%] left-20" src="/flowers/single-leaf-2.png" alt="" />
