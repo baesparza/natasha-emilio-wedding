@@ -59,7 +59,7 @@ export function ConfirmInvitation() {
         /// validations
         if (name.length < 3)
             error = 'Por favor completa el nombre correctamente.';
-        else if (phone.length !==10)
+        else if (phone.length !== 10)
             error = 'Por favor verifica que el teléfono tenga 10 caracteres.';
 
         setValidation(error);
@@ -81,50 +81,55 @@ export function ConfirmInvitation() {
             <span className="-mt-2 text-2xl self-end">a nuestra boda</span>
         </h3>
 
+        <div className="mt-2 text-center text-sm text-oliveGreen">
+            La fecha de confirmación ha finalizado, muchas gracias. 
+            <br />
+            Pronto publicaremos fotos de la boda.
+        </div>
         {
-            !!successError
-                ? <div className="mt-2 text-center text-sm text-oliveGreen">Hemos guardado tu confirmación</div>
+            // !!successError 
+            //     ? <div className="mt-2 text-center text-sm text-oliveGreen">Hemos guardado tu confirmación</div>
 
-                // form
-                : <>
-                    <form onSubmit={handleSubmit} className="container flex flex-col items-center justify-center">
-                        <div className="mb-8 flex flex-col md:flex-row gap-4">
-                            {/* Name Input */}
-                            <div className="flex flex-col gap-1 items-start max-w-screen-sm w-full">
-                                <label className="text-sm font-semibold">Nombre:</label>
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(event) => setName(event.target.value)}
-                                    className="w-full border-2 border-rosewood rounded-md px-4 py-1"
-                                />
-                            </div>
+            //     // form
+            //     : <>
+            //         <form onSubmit={handleSubmit} className="container flex flex-col items-center justify-center">
+            //             <div className="mb-8 flex flex-col md:flex-row gap-4">
+            //                 {/* Name Input */}
+            //                 <div className="flex flex-col gap-1 items-start max-w-screen-sm w-full">
+            //                     <label className="text-sm font-semibold">Nombre:</label>
+            //                     <input
+            //                         type="text"
+            //                         value={name}
+            //                         onChange={(event) => setName(event.target.value)}
+            //                         className="w-full border-2 border-rosewood rounded-md px-4 py-1"
+            //                     />
+            //                 </div>
 
-                            {/* ID Input */}
-                            <div className="flex flex-col gap-1 items-start max-w-screen-sm w-full">
-                                <label className="text-sm font-semibold">Teléfono:</label>
-                                <input
-                                    type="text"
-                                    value={phone}
-                                    onChange={(event) => setPhone(event.target.value)}
-                                    className="w-full border-2 border-rosewood rounded-md px-4 py-1"
-                                />
-                            </div>
-                        </div>
+            //                 {/* ID Input */}
+            //                 <div className="flex flex-col gap-1 items-start max-w-screen-sm w-full">
+            //                     <label className="text-sm font-semibold">Teléfono:</label>
+            //                     <input
+            //                         type="text"
+            //                         value={phone}
+            //                         onChange={(event) => setPhone(event.target.value)}
+            //                         className="w-full border-2 border-rosewood rounded-md px-4 py-1"
+            //                     />
+            //                 </div>
+            //             </div>
 
 
-                        {/* Submit Button */}
-                        <button type="submit" className="relative z-10 shadow-[0px_0px_5px_rgba(0,0,0,0.2)] text-black-light w-fit px-10 py-4 text-sm uppercase bg-white hover:bg-lavender hover:text-white  transition-colors duration-200">
-                            Confirma tu asistencia
-                        </button>
+            //             {/* Submit Button */}
+            //             <button type="submit" className="relative z-10 shadow-[0px_0px_5px_rgba(0,0,0,0.2)] text-black-light w-fit px-10 py-4 text-sm uppercase bg-white hover:bg-lavender hover:text-white  transition-colors duration-200">
+            //                 Confirma tu asistencia
+            //             </button>
 
-                        {
-                            !!validationError
-                                ? <div className="mt-2 text-center text-sm text-[#8c1d18]">* {validationError}</div>
-                                : <></>
-                        }
-                    </form>
-                </>
+            //             {
+            //                 !!validationError
+            //                     ? <div className="mt-2 text-center text-sm text-[#8c1d18]">* {validationError}</div>
+            //                     : <></>
+            //             }
+            //         </form>
+            //     </>
         }
 
         {/* assets */}
