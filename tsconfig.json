@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "src/**/*"],
+  "exclude": ["dist", "legacy", "sanity", "node_modules"]
+}
