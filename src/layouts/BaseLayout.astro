@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import SmoothScroll from '../islands/SmoothScroll.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	canonicalUrl?: string;
+	lang?: string;
+}
+
+const {
+	title = 'Studio Wedding',
+	description = 'A premium, mobile-first wedding invitation experience.',
+	ogImage,
+	canonicalUrl,
+	lang = 'en',
+} = Astro.props;
+
+const pageTitle = title === 'Studio Wedding' ? title : `${title} · Studio Wedding`;
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#ffffff" />
+
+		<title>{pageTitle}</title>
+
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+
+		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		<slot name="head" />
+	</head>
+	<body>
+		<a
+			href="#main"
+			class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2"
+		>
+			Skip to content
+		</a>
+
+		<slot name="header" />
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<slot name="footer" />
+
+		<!-- Global motion / interaction islands -->
+		<SmoothScroll />
+		<slot name="islands" />
+	</body>
+</html>

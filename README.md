@@ -4,13 +4,13 @@ Premium, mobile-first multi-tenant wedding invitation platform built with Astro.
 
 ## Commands
 
-| Command                | Action                                      |
-| :--------------------- | :------------------------------------------ |
-| `npm install`          | Install dependencies                        |
-| `npm run dev`          | Start local dev server at `localhost:4321`  |
-| `npm run build`        | Build production site to `./dist/`          |
-| `npm run preview`      | Preview the production build locally        |
-| `npm run astro ...`    | Run Astro CLI commands                      |
+| Command             | Action                                     |
+| :------------------ | :----------------------------------------- |
+| `npm install`       | Install dependencies                       |
+| `npm run dev`       | Start local dev server at `localhost:4321` |
+| `npm run build`     | Build production site to `./dist/`         |
+| `npm run preview`   | Preview the production build locally       |
+| `npm run astro ...` | Run Astro CLI commands                     |
 
 ## Project notes
 

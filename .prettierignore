@@ -1,0 +1,16 @@
+# dependencies / build
+node_modules
+dist
+.astro
+.vercel
+
+# lockfiles
+package-lock.json
+
+# archived / deferred
+legacy
+sanity
+
+# generated
+src/env.d.ts
+*.tsbuildinfo
