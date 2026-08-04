@@ -21,6 +21,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { $ } from './dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,7 +110,7 @@ export function scrollTo(
 		return;
 	}
 
-	const element = typeof target === 'string' ? document.querySelector<HTMLElement>(target) : target;
+	const element = typeof target === 'string' ? $(target) : target;
 
 	element?.scrollIntoView({
 		behavior: options?.immediate || prefersReducedMotion() ? 'auto' : 'smooth',

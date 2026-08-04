@@ -51,6 +51,10 @@ their wedding.
   use GSAP for scroll-based animation.
 - Keep GSAP, Lenis, loader behavior, sticky RSVP UI, and form logic isolated
   in client-side islands/scripts.
+- Use `src/scripts/dom.ts` as the single DOM-query abstraction in client-side
+  code: `$<T>(selector, scope?)` for one element and `$$<T>(selector, scope?)`
+  for multiple elements. Do not call `querySelector`, `querySelectorAll`, or
+  `getElementById` directly outside that helper.
 - Do not expose write tokens or credentials to browser code.
 
 ## Legacy Application
