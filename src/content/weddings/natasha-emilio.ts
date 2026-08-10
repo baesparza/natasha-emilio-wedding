@@ -31,6 +31,7 @@ export const natashaEmilio: Wedding = {
 		imageAlt: 'Pareja caminando entre árboles al atardecer',
 		eyebrow: '19 · 10 · 2024',
 		headline: 'Todas las bodas tienen una historia, forma parte de ella',
+		logo: '/weddings/natasha-emilio/logo.jpg',
 	},
 	quote: {
 		lead: 'Amamos la vida, no por el hábito de vivir',
@@ -59,8 +60,10 @@ export const natashaEmilio: Wedding = {
 	},
 	indications: {
 		heading: 'Aquí te dejamos unas indicaciones para tu asistencia…',
-		childFree:
-			'Nos gustan tanto los niños que no queremos que se desvelen ni pasen frío. Solo adultos, por favor.',
+		children: {
+			title: 'Child Free',
+			body: 'Nos gustan tanto los niños que no queremos que se desvelen ni pasen frío. Solo adultos, por favor.',
+		},
 		guests:
 			'Queremos celebrar nuestro amor con un aforo limitado. La invitación es exclusiva para ti.',
 		dressCode: {

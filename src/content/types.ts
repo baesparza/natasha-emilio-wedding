@@ -31,6 +31,8 @@ export interface Wedding {
 		imageAlt: string;
 		eyebrow: string;
 		headline: string;
+		/** Optional monogram or logo shown above the hero. */
+		logo?: string;
 	};
 	quote: {
 		/** Setup line(s) before the turn */
@@ -52,6 +54,13 @@ export interface Wedding {
 		receptionLabel: string;
 		mapImage: string;
 		mapUrl: string;
+		/** Individual ceremony/reception locations when the event spans venues. */
+		places?: Array<{
+			label: string;
+			name: string;
+			address: string;
+			mapUrl?: string;
+		}>;
 		/** Optional travel / lodging. Omit when unused. */
 		travel?: {
 			heading: string;
@@ -61,7 +70,10 @@ export interface Wedding {
 	};
 	indications: {
 		heading: string;
-		childFree: string;
+		children: {
+			title: string;
+			body: string;
+		};
 		guests: string;
 		dressCode: {
 			description: string;

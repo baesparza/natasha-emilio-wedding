@@ -11,11 +11,16 @@ const { hero, couple } = Astro.props;
 
 <header class="bg-wedding-surface px-gutter py-[clamp(1.25rem,4vw,3rem)]">
 	<div class="mx-auto max-w-6xl">
-		<img
-			src="/weddings/natasha-emilio/logo.jpg"
-			alt={`Monograma de ${couple.primaryName} y ${couple.secondaryName}`}
-			class="w-20 sm:w-24"
-		/>
+		{
+			hero.logo && (
+				<img
+					src={hero.logo}
+					alt={`Monograma de ${couple.primaryName} y ${couple.secondaryName}`}
+					class="w-20 sm:w-24"
+				/>
+			)
+		}
+		<!-- TODO: Request or create a monogram for tenants without a logo. -->
 
 		<!-- Photo + copy; on mobile the card overlaps the image -->
 		<div

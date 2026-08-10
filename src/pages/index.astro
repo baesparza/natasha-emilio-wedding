@@ -11,8 +11,8 @@ import RsvpForm from '@/components/wedding/RsvpForm.astro';
 import InvitationFooter from '@/components/wedding/InvitationFooter.astro';
 
 // Local multi-tenant fallback: ?wedding=<slug>, else default tenant
-const slug = Astro.url.searchParams.get('wedding') ?? 'natasha-emilio';
-const wedding = getWeddingBySlug(slug) ?? getWeddingBySlug('natasha-emilio');
+const slug = Astro.url.searchParams.get('wedding') ?? 'dennise-victor';
+const wedding = getWeddingBySlug(slug) ?? getWeddingBySlug('dennise-victor');
 
 if (!wedding) throw new Error('The default wedding tenant is not configured.');
 

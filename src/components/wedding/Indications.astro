@@ -7,10 +7,7 @@ interface Props {
 
 const { indications } = Astro.props;
 
-const rules = [
-	{ title: 'Child Free', body: indications.childFree },
-	{ title: 'Invitados', body: indications.guests },
-] as const;
+const rules = [indications.children, { title: 'Invitados', body: indications.guests }] as const;
 ---
 
 <!-- Attendance rules -->

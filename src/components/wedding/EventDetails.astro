@@ -16,6 +16,7 @@ const calendarFilename = `${slug}.ics`;
 const invitationText = `${event.invitationLead} ${event.invitationClose}`;
 const travel = event.travel;
 const stays = travel?.stays ?? [];
+const places = event.places ?? [];
 
 const buttonClass =
 	'border-wedding-rosewood text-sm text-wedding-rosewood mt-10 inline-flex self-center border px-5 py-3 font-semibold tracking-[0.12em] uppercase transition-colors hover:bg-wedding-rosewood hover:text-wedding-surface lg:self-start';
@@ -80,14 +81,45 @@ const buttonClass =
 			<!-- Venue, travel & lodging -->
 			<div class="mt-10 text-center sm:mt-12 lg:text-left">
 				<p class="font-label text-wedding-olive text-xl tracking-[0.08em] uppercase">Lugar</p>
-				<p class="text-wedding-ink-muted mt-3 text-base leading-relaxed text-pretty">
-					{event.venue}<br />
-					{event.address}
-				</p>
-
-				<a href={event.mapUrl} target="_blank" rel="noopener noreferrer" class={buttonClass}>
-					Ver en Google Maps
-				</a>
+				{
+					places.length > 0 ? (
+						<div class="mt-5 flex flex-col gap-8">
+							{places.map((place) => (
+								<div>
+									<p class="font-label text-wedding-rosewood text-sm tracking-[0.14em] uppercase">
+										{place.label}
+									</p>
+									<p class="text-wedding-ink-muted mt-2 text-base leading-relaxed text-pretty">
+										{place.name}
+										<br />
+										{place.address}
+									</p>
+									{place.mapUrl && (
+										<a
+											href={place.mapUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="text-wedding-rosewood decoration-wedding-rosewood mt-4 inline-flex text-sm font-semibold tracking-[0.12em] uppercase underline underline-offset-4"
+										>
+											Ver en Google Maps
+										</a>
+									)}
+								</div>
+							))}
+						</div>
+					) : (
+						<>
+							<p class="text-wedding-ink-muted mt-3 text-base leading-relaxed text-pretty">
+								{event.venue}
+								<br />
+								{event.address}
+							</p>
+							<a href={event.mapUrl} target="_blank" rel="noopener noreferrer" class={buttonClass}>
+								Ver en Google Maps
+							</a>
+						</>
+					)
+				}
 
 				{
 					travel && (
