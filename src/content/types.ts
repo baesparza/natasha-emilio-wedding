@@ -12,6 +12,7 @@ export interface WeddingTheme {
 	};
 }
 
+// TODO: Load images more efficiently — WebP (or Astro Image) with blur-up placeholders instead of raw public `<img>` URLs.
 /** Presentation-facing wedding content contract. Adapters map CMS/local data into this shape. */
 export interface Wedding {
 	slug: string;

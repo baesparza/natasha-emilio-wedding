@@ -91,3 +91,4 @@ Tracked code TODOs (keep this list in sync when adding or resolving `TODO` comme
 - [ ] **Add to calendar** (`src/content/calendar.ts`) — direct Google Calendar / Outlook / Apple links alongside the `.ics` download
 - [ ] **Astro tag formatting** (`.prettierrc.mjs`) — find a multiline tag-content formatter that does not conflict with Prettier.
 - [ ] **Tenant monograms** (`src/components/wedding/Hero.astro`) — request or create a logo for weddings that do not provide one.
+- [ ] **Efficient images** (`src/content/types.ts`) — serve WebP (or Astro Image) with blur-up placeholders instead of raw public `<img>` URLs.
