@@ -1,0 +1,123 @@
+---
+import type { Wedding } from '@/content/types';
+
+interface Props {
+	rsvp: Wedding['rsvp'];
+}
+
+const { rsvp } = Astro.props;
+---
+
+<section id="rsvp" class="bg-wedding-surface py-section scroll-mt-6" aria-labelledby="rsvp-title">
+	<div class="px-gutter mx-auto max-w-2xl text-center">
+		<h2 id="rsvp-title" class="font-script text-wedding-ink-muted text-8xl leading-[0.75]">
+			<span class="-ml-12 block">
+				<span class="text-wedding-rosewood text-9xl"> T </span><span class="-ml-2"> e </span>
+			</span>
+			<span class="block"> invitamos </span>
+			<span class="mt-2 block text-xl"> a nuestra boda </span>
+		</h2>
+		<p class="text-wedding-ink-muted mt-10 text-base">{rsvp.deadline}</p>
+
+		<form id="rsvp-form" class="mx-auto mt-8 grid max-w-xl gap-5 text-left" novalidate>
+			<div>
+				<label class="text-sm font-semibold" for="rsvp-name"> Nombre completo </label>
+				<input
+					id="rsvp-name"
+					name="name"
+					autocomplete="name"
+					required
+					aria-describedby="rsvp-error"
+					class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
+				/>
+			</div>
+			<div class="grid gap-5 sm:grid-cols-2">
+				<div>
+					<label class="text-sm font-semibold" for="rsvp-phone"> Teléfono </label>
+					<input
+						id="rsvp-phone"
+						name="phone"
+						type="tel"
+						inputmode="tel"
+						autocomplete="tel"
+						required
+						aria-describedby="rsvp-error"
+						class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
+					/>
+				</div>
+				<div>
+					<label class="text-sm font-semibold" for="rsvp-guests"> Número de asistentes </label>
+					<input
+						id="rsvp-guests"
+						name="guests"
+						type="number"
+						min="1"
+						max="10"
+						value="1"
+						required
+						aria-describedby="rsvp-error"
+						class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
+					/>
+				</div>
+			</div>
+			<p id="rsvp-error" class="hidden text-sm text-red-800" role="alert"></p>
+			<p
+				id="rsvp-success"
+				class="text-wedding-olive hidden text-sm"
+				role="status"
+				aria-live="polite"
+			>
+			</p>
+			<button
+				type="submit"
+				class="border-wedding-rosewood text-wedding-ink-muted hover:bg-wedding-lavender hover:text-wedding-surface justify-self-center border px-7 py-4 text-sm font-semibold tracking-[0.14em] uppercase"
+			>
+				Confirma tu asistencia
+			</button>
+		</form>
+	</div>
+</section>
+
+<!-- Validation + persistence boundary (no write until RSVP backend is wired) -->
+<script>
+	import { $ } from '@/scripts/dom';
+	import { saveRsvpSubmission } from '@/scripts/rsvp';
+
+	const form = $<HTMLFormElement>('#rsvp-form');
+	const error = $<HTMLParagraphElement>('#rsvp-error');
+	const success = $<HTMLParagraphElement>('#rsvp-success');
+	const nameInput = $<HTMLInputElement>('#rsvp-name');
+	const phoneInput = $<HTMLInputElement>('#rsvp-phone');
+	const guestsInput = $<HTMLInputElement>('#rsvp-guests');
+
+	form?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		const name = nameInput?.value.trim() ?? '';
+		const phone = phoneInput?.value.replace(/\D/g, '') ?? '';
+		const guests = Number(guestsInput?.value ?? 0);
+		const message =
+			name.length < 3
+				? 'Completa tu nombre para confirmar.'
+				: phone.length < 7
+					? 'Ingresa un teléfono válido para confirmar.'
+					: guests < 1
+						? 'Indica cuántas personas asistirán.'
+						: '';
+
+		if (error) {
+			error.textContent = message;
+			error.classList.toggle('hidden', !message);
+		}
+
+		for (const input of [nameInput, phoneInput, guestsInput])
+			input?.setAttribute('aria-invalid', String(Boolean(message)));
+
+		if (message || !success) return;
+
+		await saveRsvpSubmission({ name, phone, guests });
+		success.textContent =
+			'Tu confirmación está lista para guardarse. La conexión de RSVP se activará próximamente.';
+		success.classList.remove('hidden');
+		form.reset();
+	});
+</script>

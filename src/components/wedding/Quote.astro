@@ -1,0 +1,46 @@
+---
+import type { Wedding } from '@/content/types';
+
+interface Props {
+	quote: Wedding['quote'];
+}
+
+const { quote } = Astro.props;
+const fullText = `${quote.lead} ${quote.close}`;
+---
+
+<section class="quote bg-wedding-surface relative" aria-label="Cita de la invitación">
+	<div class="px-gutter relative mx-auto max-w-3xl py-[clamp(5.5rem,15vw,10rem)] text-center">
+		<span
+			class="font-script text-wedding-rosewood/[0.28] pointer-events-none absolute top-[clamp(1.5rem,5vw,3rem)] left-1/2 -translate-x-1/2 text-[clamp(7rem,24vw,12rem)] leading-none select-none"
+			aria-hidden="true"
+		>
+			“
+		</span>
+
+		<blockquote class="relative pt-[clamp(3.5rem,10vw,5.5rem)]">
+			<!-- sr-only full line; decorative lead + script close -->
+			<p class="sr-only">{fullText}</p>
+
+			<p
+				class="text-wedding-ink-muted mx-auto max-w-[24ch] font-serif text-5xl leading-[1.35] text-balance italic"
+				aria-hidden="true"
+			>
+				{quote.lead}
+			</p>
+
+			<p
+				class="font-script text-wedding-olive mx-auto mt-[clamp(1.5rem,4vw,2.5rem)] max-w-[min(22rem,94%)] text-6xl leading-[1.15] text-balance"
+				aria-hidden="true"
+			>
+				{quote.close}
+			</p>
+		</blockquote>
+
+		<span
+			class="bg-wedding-rosewood/55 mx-auto mt-[clamp(2.25rem,5vw,3.25rem)] block h-px w-16"
+			aria-hidden="true"
+		>
+		</span>
+	</div>
+</section>

@@ -1,0 +1,40 @@
+---
+description: Sparse comments for markup landmarks and non-obvious intent
+globs: src/**/*.{ts,tsx,astro,css,js}
+alwaysApply: false
+---
+
+# File sections and comments
+
+In `src/`, comment where it helps — not by file length. Prefer a few landmarks
+in longer markup and notes for non-obvious intent.
+
+## What to comment
+
+- In Astro **markup**, use HTML comments (`<!-- ... -->`) to mark major visual
+  regions when those landmarks make the template easier to scan.
+- Comment non-obvious intent (dual aria text, persistence boundaries, theme
+  override behavior, tenant resolution, sticky UI, etc.).
+- Prefer `//` in TS/JS/CSS and Astro frontmatter / `<script>` / `<style>`.
+
+## What not to comment
+
+- Do not label obvious structure: `Props`, `Imports`, property names that
+  already match the comment, or restating the next heading.
+- Do not use `{/* ... */}` in Astro markup — that is JSX, not HTML.
+- Do not comment every block. Sparse beats thorough.
+- Ignore `legacy/`.
+
+## Example
+
+```astro
+---
+const { event } = Astro.props;
+---
+
+<!-- Invitation -->
+<section>...</section>
+
+<!-- Venue & map -->
+<section>...</section>
+```

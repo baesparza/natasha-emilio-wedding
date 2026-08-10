@@ -56,6 +56,20 @@ their wedding.
   for multiple elements. Do not call `querySelector`, `querySelectorAll`, or
   `getElementById` directly outside that helper.
 - Do not expose write tokens or credentials to browser code.
+- Prefer sparse comments that help scan markup (`<!-- region -->` in Astro
+  HTML, not `{/* */}`) and note non-obvious intent. Do not label obvious
+  props, imports, or names that already match the next code. Apply wherever
+  relevant — not only in long files.
+
+## TODO tracking
+
+Whenever you add, change, or remove a `TODO` / `FIXME` comment in project
+code (anything outside `legacy/`), update the **TODOs** section in
+`README.md` in the same change:
+
+- Add a checkbox item with a short label, the file path, and what remains.
+- Remove or check off the README item when the code TODO is resolved.
+- Do not invent README TODOs that are not backed by a code comment.
 
 ## Legacy Application
 

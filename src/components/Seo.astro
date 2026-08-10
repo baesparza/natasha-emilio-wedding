@@ -1,0 +1,138 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	imageAlt?: string;
+	canonicalUrl?: string;
+	siteName?: string;
+	locale?: string;
+	type?: 'website';
+	noindex?: boolean;
+	event?: {
+		name: string;
+		startDate: string;
+		endDate?: string;
+		locationName: string;
+		locationAddress?: string;
+	};
+}
+
+const {
+	title,
+	description,
+	image,
+	imageAlt = title,
+	canonicalUrl,
+	siteName = 'Studio Wedding',
+	locale = 'en',
+	type = 'website',
+	noindex = false,
+	event,
+} = Astro.props;
+
+const localeTags: Record<string, { og: string; html: string }> = {
+	es: { og: 'es_ES', html: 'es-ES' },
+	en: { og: 'en_US', html: 'en-US' },
+};
+const { og: ogLocale, html: inLanguage } = localeTags[locale] ?? {
+	og: locale.replace('-', '_'),
+	html: locale.includes('-') ? locale : locale,
+};
+
+const origin = Astro.site?.href ?? Astro.url.origin;
+const canonical = canonicalUrl
+	? new URL(canonicalUrl, origin).href
+	: new URL(Astro.url.pathname, origin).href;
+const imageUrl = image ? new URL(image, origin).href : undefined;
+
+const graph: Record<string, unknown>[] = [
+	{
+		'@type': 'WebSite',
+		'@id': `${origin}/#website`,
+		url: origin,
+		name: siteName,
+		inLanguage,
+	},
+	{
+		'@type': 'WebPage',
+		'@id': `${canonical}#webpage`,
+		url: canonical,
+		name: title,
+		description,
+		isPartOf: { '@id': `${origin}/#website` },
+		...(imageUrl && {
+			primaryImageOfPage: {
+				'@type': 'ImageObject',
+				url: imageUrl,
+			},
+		}),
+		inLanguage,
+	},
+];
+
+if (event)
+	graph.push({
+		'@type': 'Event',
+		'@id': `${canonical}#event`,
+		name: event.name,
+		description,
+		startDate: event.startDate,
+		...(event.endDate && { endDate: event.endDate }),
+		eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+		eventStatus: 'https://schema.org/EventScheduled',
+		image: imageUrl ? [imageUrl] : undefined,
+		location: {
+			'@type': 'Place',
+			name: event.locationName,
+			...(event.locationAddress && {
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: event.locationAddress,
+				},
+			}),
+		},
+		url: canonical,
+	});
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': graph,
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta
+	name="robots"
+	content={noindex
+		? 'noindex, nofollow'
+		: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+/>
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{
+	imageUrl && (
+		<>
+			<meta property="og:image" content={imageUrl} />
+			<meta property="og:image:secure_url" content={imageUrl} />
+			<meta property="og:image:alt" content={imageAlt} />
+		</>
+	)
+}
+
+<!-- Twitter -->
+<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+{imageUrl && <meta name="twitter:image:alt" content={imageAlt} />}
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

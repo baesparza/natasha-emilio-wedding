@@ -1,19 +1,85 @@
 @import 'tailwindcss';
 @import 'lenis/dist/lenis.css';
 
+/* Design tokens — overridable per wedding via inline theme on <body> */
+:root {
+	--color-lavender: #86778c;
+	--color-rosewood: #c6939b;
+	--color-beige: #d4b2a0;
+	--color-olive: #436038;
+	--color-bride: #faf9ee;
+	--color-ink: #101010;
+	--color-ink-muted: #3f3f3f;
+	--color-ink-strong: #000000;
+	--color-surface: #ffffff;
+
+	--space-gutter: clamp(1rem, 4vw, 2rem);
+	--space-section: clamp(6rem, 16vw, 11rem);
+}
+
+/* Expose tokens to Tailwind utilities (`bg-wedding-*`, `font-script`, …) */
+@theme inline {
+	--color-wedding-lavender: var(--color-lavender);
+	--color-wedding-rosewood: var(--color-rosewood);
+	--color-wedding-beige: var(--color-beige);
+	--color-wedding-olive: var(--color-olive);
+	--color-wedding-bride: var(--color-bride);
+	--color-wedding-ink: var(--color-ink);
+	--color-wedding-ink-muted: var(--color-ink-muted);
+	--color-wedding-ink-strong: var(--color-ink-strong);
+	--color-wedding-surface: var(--color-surface);
+	--spacing-gutter: var(--space-gutter);
+	--spacing-section: var(--space-section);
+	--text-sm: clamp(0.8125rem, 0.25vw + 0.75rem, 0.875rem);
+	--text-base: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+	--text-xl: clamp(1.25rem, 2vw + 0.25rem, 1.5rem);
+	--text-2xl: clamp(1.45rem, 2.4vw + 0.55rem, 2rem);
+	--text-3xl: clamp(1.75rem, 3vw + 0.5rem, 2.25rem);
+	--text-4xl: clamp(2rem, 4vw + 0.5rem, 2.5rem);
+	--text-5xl: clamp(1.65rem, 3.2vw + 0.6rem, 2.75rem);
+	--text-6xl: clamp(2.1rem, 3.8vw + 0.65rem, 3.35rem);
+	--text-7xl: clamp(2.35rem, 4.2vw + 0.7rem, 3.5rem);
+	--text-8xl: clamp(3rem, 8vw + 1rem, 6rem);
+	--text-9xl: clamp(4rem, 10vw, 6rem);
+	--font-script: 'Parisienne', cursive;
+	--font-serif: 'Baskervville', serif;
+	--font-label: 'Baskervville SC', serif;
+	--font-body: 'Montserrat', sans-serif;
+}
+
 html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
+	background: var(--color-surface);
 }
 
 body {
 	min-height: 100dvh;
 	margin: 0;
+	background: var(--color-surface);
+	color: var(--color-ink);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	line-height: 1.55;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-rosewood);
+	outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	html {
+	html:focus-within {
 		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
 	}
 }

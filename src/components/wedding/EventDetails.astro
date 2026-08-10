@@ -1,0 +1,139 @@
+---
+import { createCalendarUrl } from '@/content/calendar';
+import type { Wedding } from '@/content/types';
+
+interface Props {
+	slug: Wedding['slug'];
+	locale: Wedding['locale'];
+	seo: Wedding['seo'];
+	event: Wedding['event'];
+	couple: Wedding['couple'];
+}
+
+const { slug, locale, seo, event, couple } = Astro.props;
+const calendarUrl = createCalendarUrl({ slug, locale, seo, event });
+const calendarFilename = `${slug}.ics`;
+const invitationText = `${event.invitationLead} ${event.invitationClose}`;
+const travel = event.travel;
+const stays = travel?.stays ?? [];
+
+const buttonClass =
+	'border-wedding-rosewood text-sm text-wedding-rosewood mt-10 inline-flex self-center border px-5 py-3 font-semibold tracking-[0.12em] uppercase transition-colors hover:bg-wedding-rosewood hover:text-wedding-surface lg:self-start';
+---
+
+<section id="celebracion" class="bg-wedding-surface py-section scroll-mt-6">
+	<div
+		class="px-gutter mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-start lg:gap-20"
+	>
+		<article class="relative flex flex-col text-center lg:text-left">
+			<p class="font-label text-wedding-olive text-4xl italic">
+				<span class="text-wedding-lavender">{couple.primaryName.toUpperCase()}</span>
+				<span class="text-wedding-rosewood/70 mx-2 not-italic" aria-hidden="true">·</span>
+				{couple.secondaryName.toUpperCase()}
+			</p>
+
+			<!-- Invitation: sr-only full line, decorative lead + script close -->
+			<h2 class="mt-8 sm:mt-10">
+				<span class="sr-only">{invitationText}</span>
+				<span
+					class="text-wedding-ink-muted block font-serif text-2xl leading-[1.35] text-balance italic"
+					aria-hidden="true"
+				>
+					{event.invitationLead}
+				</span>
+				<span
+					class="font-script text-wedding-olive mt-3 block text-7xl leading-[1.15] text-balance sm:mt-4"
+					aria-hidden="true"
+				>
+					{event.invitationClose}
+				</span>
+			</h2>
+
+			<span
+				class="bg-wedding-rosewood/50 mx-auto mt-10 block h-px w-14 sm:mt-12 lg:mx-0"
+				aria-hidden="true"
+			>
+			</span>
+
+			<!-- Date & calendar -->
+			<div class="mt-10 sm:mt-12">
+				<p class="font-label text-wedding-olive text-xl tracking-[0.08em] uppercase">
+					Fecha y hora
+				</p>
+				<p class="text-wedding-ink-muted mt-3 text-base leading-relaxed text-pretty">
+					{event.dateLabel}<br />
+					{event.ceremonyLabel}<br />
+					{event.receptionLabel}
+				</p>
+
+				<a href={calendarUrl} download={calendarFilename} class={buttonClass}>
+					Agregar al calendario
+				</a>
+			</div>
+
+			<span
+				class="bg-wedding-rosewood/50 mx-auto mt-14 block h-px w-14 sm:mt-16 lg:mx-0"
+				aria-hidden="true"
+			>
+			</span>
+
+			<!-- Venue, travel & lodging -->
+			<div class="mt-10 text-center sm:mt-12 lg:text-left">
+				<p class="font-label text-wedding-olive text-xl tracking-[0.08em] uppercase">Lugar</p>
+				<p class="text-wedding-ink-muted mt-3 text-base leading-relaxed text-pretty">
+					{event.venue}<br />
+					{event.address}
+				</p>
+
+				<a href={event.mapUrl} target="_blank" rel="noopener noreferrer" class={buttonClass}>
+					Ver en Google Maps
+				</a>
+
+				{
+					travel && (
+						<div class="mt-12">
+							<h3 class="font-label text-wedding-olive text-sm tracking-[0.16em] uppercase">
+								{travel.heading}
+							</h3>
+							{travel.note && (
+								<p class="text-wedding-ink-muted mx-auto mt-4 max-w-md text-base text-pretty lg:mx-0">
+									{travel.note}
+								</p>
+							)}
+							{stays.length > 0 && (
+								<ul class={`flex flex-col gap-4 text-sm ${travel.note ? 'mt-8' : 'mt-4'}`}>
+									{stays.map((stay) => (
+										<li>
+											<a
+												class="decoration-wedding-rosewood underline underline-offset-4"
+												href={`tel:+${stay.phone}`}
+											>
+												{stay.name} · {stay.phone}
+											</a>
+										</li>
+									))}
+								</ul>
+							)}
+						</div>
+					)
+				}
+			</div>
+		</article>
+
+		<!-- Map -->
+		<a
+			href={event.mapUrl}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group bg-wedding-lavender relative block aspect-square overflow-hidden focus-visible:outline-offset-4"
+			aria-label={`Ver mapa de ${event.venue} en Google Maps`}
+		>
+			<img
+				src={event.mapImage}
+				alt={`Mapa para llegar a ${event.venue}`}
+				class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+				loading="lazy"
+			/>
+		</a>
+	</div>
+</section>

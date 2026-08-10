@@ -1,0 +1,15 @@
+---
+description: Keep README TODOs in sync with code TODO comments
+alwaysApply: true
+---
+
+# TODO tracking
+
+Whenever you add, change, or remove a `TODO` / `FIXME` comment in project
+code (outside `legacy/`), update the **TODOs** section in `README.md` in the
+same change.
+
+- Add a checkbox with a short label, file path, and remaining work.
+- Remove or check off the README item when the code TODO is resolved.
+- Do not invent README TODOs that are not backed by a code comment.
+- Ignore placeholder TODOs inside `legacy/`.

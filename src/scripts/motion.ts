@@ -44,10 +44,7 @@ function onMotionPreferenceChange(event: MediaQueryListEvent): void {
 	if (event.matches) destroyMotion();
 }
 
-/**
- * Boot site-wide Lenis and wire it to the GSAP ticker.
- * Call once from the SmoothScroll island (BaseLayout).
- */
+/** Boot site-wide Lenis once from the SmoothScroll island (BaseLayout). */
 export function initMotion(): Lenis | null {
 	if (typeof window === 'undefined' || booted) return lenis;
 
@@ -95,7 +92,7 @@ export function getLenis(): Lenis | null {
 	return lenis;
 }
 
-/** Smooth-scroll to a target when Lenis is active; falls back to native scroll. */
+/** Smooth-scroll via Lenis when active; otherwise native scroll. */
 export function scrollTo(
 	target: string | number | HTMLElement,
 	options?: { offset?: number; immediate?: boolean },

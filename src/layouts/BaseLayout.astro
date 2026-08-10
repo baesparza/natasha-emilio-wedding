@@ -1,24 +1,49 @@
 ---
 import '../styles/global.css';
 import SmoothScroll from '../islands/SmoothScroll.astro';
+import Seo from '../components/Seo.astro';
+import type { WeddingTheme } from '@/content/types';
 
 interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	ogImageAlt?: string;
 	canonicalUrl?: string;
 	lang?: string;
+	theme?: WeddingTheme;
+	noindex?: boolean;
+	event?: {
+		name: string;
+		startDate: string;
+		endDate?: string;
+		locationName: string;
+		locationAddress?: string;
+	};
 }
 
 const {
 	title = 'Studio Wedding',
 	description = 'A premium, mobile-first wedding invitation experience.',
 	ogImage,
+	ogImageAlt,
 	canonicalUrl,
 	lang = 'en',
+	theme,
+	noindex = false,
+	event,
 } = Astro.props;
 
 const pageTitle = title === 'Studio Wedding' ? title : `${title} · Studio Wedding`;
+// Maps camelCase theme keys → --color-* CSS vars on <body>
+const themeStyle = theme
+	? Object.entries(theme.colors)
+			.map(([name, value]) => {
+				const token = name.replace(/([A-Z])/g, '-$1').toLowerCase();
+				return `--color-${token}: ${value}`;
+			})
+			.join('; ')
+	: undefined;
 ---
 
 <!doctype html>
@@ -27,35 +52,36 @@ const pageTitle = title === 'Studio Wedding' ? title : `${title} · Studio Weddi
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<meta name="theme-color" content="#ffffff" />
+		<meta name="theme-color" content={theme?.colors.surface ?? '#ffffff'} />
 
-		<title>{pageTitle}</title>
+		<Seo
+			title={pageTitle}
+			description={description}
+			image={ogImage}
+			imageAlt={ogImageAlt}
+			canonicalUrl={canonicalUrl}
+			locale={lang}
+			noindex={noindex}
+			event={event}
+		/>
 
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={description} />
-		{ogImage && <meta property="og:image" content={ogImage} />}
-		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-
-		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={description} />
-		{ogImage && <meta name="twitter:image" content={ogImage} />}
-
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Baskervville+SC&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Parisienne&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 
 		<slot name="head" />
 	</head>
-	<body>
+	<body style={themeStyle}>
 		<a
 			href="#main"
 			class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2"
 		>
-			Skip to content
+			Saltar al contenido
 		</a>
 
 		<slot name="header" />
@@ -66,7 +92,7 @@ const pageTitle = title === 'Studio Wedding' ? title : `${title} · Studio Weddi
 
 		<slot name="footer" />
 
-		<!-- Global motion / interaction islands -->
+		<!-- Global motion islands -->
 		<SmoothScroll />
 		<slot name="islands" />
 	</body>

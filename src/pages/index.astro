@@ -1,7 +1,51 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getWeddingBySlug } from '@/content/repository';
+import Hero from '@/components/wedding/Hero.astro';
+import Quote from '@/components/wedding/Quote.astro';
+import EventDetails from '@/components/wedding/EventDetails.astro';
+import Indications from '@/components/wedding/Indications.astro';
+import ImageInterlude from '@/components/wedding/ImageInterlude.astro';
+import GiftDetails from '@/components/wedding/GiftDetails.astro';
+import RsvpForm from '@/components/wedding/RsvpForm.astro';
+import InvitationFooter from '@/components/wedding/InvitationFooter.astro';
+
+// Local multi-tenant fallback: ?wedding=<slug>, else default tenant
+const slug = Astro.url.searchParams.get('wedding') ?? 'natasha-emilio';
+const wedding = getWeddingBySlug(slug) ?? getWeddingBySlug('natasha-emilio');
+
+if (!wedding) throw new Error('The default wedding tenant is not configured.');
+
+const coupleLabel = `${wedding.couple.primaryName} & ${wedding.couple.secondaryName}`;
 ---
 
-<BaseLayout title="Studio Wedding">
-	<h1>Studio Wedding</h1>
+<BaseLayout
+	title={wedding.seo.title}
+	description={wedding.seo.description}
+	ogImage={wedding.seo.ogImage}
+	ogImageAlt={coupleLabel}
+	lang={wedding.locale}
+	theme={wedding.theme}
+	event={{
+		name: wedding.seo.title,
+		startDate: wedding.event.startsAt,
+		endDate: wedding.event.endsAt,
+		locationName: wedding.event.venue,
+		locationAddress: wedding.event.address,
+	}}
+>
+	<Hero hero={wedding.hero} couple={wedding.couple} />
+	<Quote quote={wedding.quote} />
+	<EventDetails
+		slug={wedding.slug}
+		locale={wedding.locale}
+		seo={wedding.seo}
+		event={wedding.event}
+		couple={wedding.couple}
+	/>
+	<Indications indications={wedding.indications} />
+	<ImageInterlude interlude={wedding.interlude} />
+	<GiftDetails gift={wedding.gift} />
+	<RsvpForm rsvp={wedding.rsvp} />
+	<InvitationFooter slot="footer" credits={wedding.credits} />
 </BaseLayout>

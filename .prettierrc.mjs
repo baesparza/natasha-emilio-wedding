@@ -6,8 +6,9 @@ export default {
 	trailingComma: 'all',
 	semi: true,
 	useTabs: true,
-	// Break ternaries onto their own lines: condition / ? / :
-	experimentalTernaries: true,
+	// TODO: Find an Astro formatter that keeps tag content multiline without conflicting with Prettier.
+	// Keep classic wraps: condition / ? / : — do not use "curious" ternaries.
+	experimentalTernaries: false,
 	overrides: [
 		{
 			files: '*.astro',

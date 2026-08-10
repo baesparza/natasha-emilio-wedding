@@ -2,13 +2,19 @@
 	"cSpell.words": ["baskervville", "Cedula", "digito", "lenis"],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "file",
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
 	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro"],
 	"eslint.useFlatConfig": true,
+	"eslint.format.enable": false,
+	"prettier.prettierPath": "./node_modules/prettier",
+	"prettier.requireConfig": true,
+	"prettier.experimentalTernaries": false,
 	"[astro]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
 	},
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -26,6 +32,9 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

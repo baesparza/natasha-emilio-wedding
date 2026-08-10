@@ -1,0 +1,48 @@
+---
+import type { Wedding } from '@/content/types';
+
+interface Props {
+	credits: Wedding['credits'];
+}
+
+const { credits } = Astro.props;
+---
+
+<footer class="bg-wedding-lavender px-gutter text-wedding-surface py-4 text-center text-sm">
+	<p>
+		{credits.text}
+		<a class="underline underline-offset-2" href={`tel:+${credits.phone}`}>{credits.phone}</a>
+	</p>
+</footer>
+
+<!-- Sticky RSVP reminder (dismiss removes from DOM) -->
+<aside
+	id="rsvp-reminder"
+	class="border-wedding-lavender bg-wedding-surface px-gutter sticky bottom-0 z-40 border-t py-4"
+	aria-label="Recordatorio de confirmación"
+>
+	<div class="mx-auto flex max-w-5xl items-center justify-between gap-5">
+		<p class="text-wedding-ink-muted text-sm font-semibold">
+			No te olvides confirmar tu asistencia.
+		</p>
+		<button
+			id="dismiss-rsvp-reminder"
+			type="button"
+			class="border-wedding-lavender text-wedding-lavender shrink-0 border px-3 py-2 text-sm font-semibold"
+			aria-label="Ocultar recordatorio de confirmación"
+		>
+			Entendido
+		</button>
+	</div>
+</aside>
+
+<script>
+	import { $ } from '@/scripts/dom';
+
+	const reminder = $<HTMLElement>('#rsvp-reminder');
+	const dismissButton = $<HTMLButtonElement>('#dismiss-rsvp-reminder');
+
+	dismissButton?.addEventListener('click', () => {
+		reminder?.remove();
+	});
+</script>
