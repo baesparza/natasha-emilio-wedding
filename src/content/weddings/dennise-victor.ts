@@ -32,6 +32,10 @@ export const denniseVictor: Wedding = {
 		eyebrow: '17 · 10 · 2026',
 		headline: 'Sí quiero, para toda la vida',
 	},
+	music: {
+		src: '/weddings/dennise-victor/Lasso-HastaEseDía.mp3',
+		title: 'Hasta Ese Día — Lasso',
+	},
 	quote: {
 		lead: 'Amar es seguir eligiéndonos cada día',
 		close: 'el resto de nuestras vidas',

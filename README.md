@@ -67,6 +67,7 @@ Image paths are public URLs (e.g. `/weddings/natasha-emilio/hero.jpg`).
 | `event.travel.stays`                | No lodging phone list                                          |
 | `event.places`                      | Renders ceremony/reception venue details when present          |
 | `hero.logo`                         | Shows a tenant monogram above the hero when present            |
+| `music`                             | Shows a play/pause control for the supplied looping audio file |
 | `indications.dressCode.colors`      | Hides the dress-code palette                                   |
 | `indications.dressCode.examplesUrl` | Hides the “examples” link                                      |
 | `indications.reservedColor`         | Uses bridal-white swatch labeled “Reservado”                   |

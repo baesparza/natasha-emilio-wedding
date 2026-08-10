@@ -34,6 +34,11 @@ export interface Wedding {
 		/** Optional monogram or logo shown above the hero. */
 		logo?: string;
 	};
+	/** Optional background track. Playback begins only after the guest chooses to play it. */
+	music?: {
+		src: string;
+		title?: string;
+	};
 	quote: {
 		/** Setup line(s) before the turn */
 		lead: string;

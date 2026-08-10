@@ -1,12 +1,14 @@
 ---
 import type { Wedding } from '@/content/types';
+import MusicToggle from '@/components/wedding/MusicToggle.astro';
 
 interface Props {
 	hero: Wedding['hero'];
 	couple: Wedding['couple'];
+	music?: Wedding['music'];
 }
 
-const { hero, couple } = Astro.props;
+const { hero, couple, music } = Astro.props;
 ---
 
 <header class="bg-wedding-surface px-gutter py-[clamp(1.25rem,4vw,3rem)]">
@@ -48,12 +50,15 @@ const { hero, couple } = Astro.props;
 				>
 					{hero.headline}
 				</h1>
-				<a
-					href="#celebracion"
-					class="text-wedding-rosewood decoration-wedding-rosewood mt-9 inline-flex text-sm font-semibold tracking-[0.18em] uppercase underline underline-offset-8"
-				>
-					Más información
-				</a>
+				<div class="mt-9 flex flex-col items-center gap-5 lg:items-start">
+					<a
+						href="#celebracion"
+						class="text-wedding-rosewood decoration-wedding-rosewood inline-flex text-sm font-semibold tracking-[0.18em] uppercase underline underline-offset-8"
+					>
+						Más información
+					</a>
+					{music && <MusicToggle music={music} />}
+				</div>
 			</div>
 		</div>
 	</div>

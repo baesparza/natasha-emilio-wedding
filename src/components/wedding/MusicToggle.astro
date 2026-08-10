@@ -1,0 +1,133 @@
+---
+import type { Wedding } from '@/content/types';
+
+interface Props {
+	music: NonNullable<Wedding['music']>;
+}
+
+const { music } = Astro.props;
+const trackLabel = music.title ? `: ${music.title}` : '';
+---
+
+<div id="music-toggle-container" class="music-toggle inline-flex">
+	<button
+		id="music-toggle"
+		class="music-toggle__button border-wedding-lavender bg-wedding-surface/90 text-wedding-ink-muted flex size-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors hover:bg-wedding-surface focus-visible:outline-none"
+		type="button"
+		aria-label={`Reproducir música${trackLabel}`}
+		aria-pressed="false"
+		title={`Reproducir música${trackLabel}`}
+	>
+		<svg
+			class="size-5"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
+			<path d="M11 5 6 9H3v6h3l5 4V5Z" />
+			<path class="music-toggle__sound" d="M15.5 9.5a3.5 3.5 0 0 1 0 5M18.5 6.5a7.5 7.5 0 0 1 0 11" />
+			<path class="music-toggle__mute" d="m16 9 5 6m0-6-5 6" />
+		</svg>
+		<span class="sr-only">Reproducir música</span>
+	</button>
+	<audio id="wedding-music" src={music.src} loop preload="metadata"></audio>
+</div>
+
+<script>
+	import { $ } from '@/scripts/dom';
+
+	const toggle = $<HTMLButtonElement>('#music-toggle');
+	const toggleContainer = $<HTMLElement>('#music-toggle-container');
+	const audio = $<HTMLAudioElement>('#wedding-music');
+	let wasPlayingBeforeHidden = false;
+
+	const syncState = (isPlaying: boolean) => {
+		if (!toggle) return;
+
+		const action = isPlaying ? 'Pausar' : 'Reproducir';
+		toggle.setAttribute('aria-pressed', String(isPlaying));
+		toggle.setAttribute('aria-label', `${action} música`);
+		toggle.setAttribute('title', `${action} música`);
+		toggle.classList.toggle('music-toggle__button--playing', isPlaying);
+		if (isPlaying) toggleContainer?.classList.add('music-toggle--activated');
+	};
+
+	if (audio && toggle) {
+		audio.volume = 0.6;
+
+		toggle.addEventListener('click', async () => {
+			if (audio.paused) {
+				try {
+					await audio.play();
+				} catch {
+					syncState(false);
+				}
+				return;
+			}
+
+			audio.pause();
+		});
+
+		audio.addEventListener('play', () => syncState(true));
+		audio.addEventListener('pause', () => syncState(false));
+		audio.addEventListener('ended', () => syncState(false));
+
+		document.addEventListener('visibilitychange', async () => {
+			if (document.hidden) {
+				wasPlayingBeforeHidden = !audio.paused;
+				if (wasPlayingBeforeHidden) audio.pause();
+				return;
+			}
+
+			if (!wasPlayingBeforeHidden) return;
+			wasPlayingBeforeHidden = false;
+
+			try {
+				await audio.play();
+			} catch {
+				syncState(false);
+			}
+		});
+	}
+</script>
+
+<style>
+	.music-toggle--activated {
+		display: inline-flex;
+		width: 2.75rem;
+		height: 2.75rem;
+	}
+
+	.music-toggle--activated .music-toggle__button {
+		position: fixed;
+		top: var(--space-gutter);
+		right: var(--space-gutter);
+		z-index: 50;
+	}
+
+	.music-toggle:not(.music-toggle--activated) .music-toggle__button:not(.music-toggle__button--playing) {
+		animation: music-toggle-breathe 3.6s ease-in-out infinite;
+	}
+
+	.music-toggle__sound {
+		display: none;
+	}
+
+	.music-toggle__button--playing .music-toggle__sound {
+		display: block;
+	}
+
+	.music-toggle__button--playing .music-toggle__mute {
+		display: none;
+	}
+
+	@keyframes music-toggle-breathe {
+		50% {
+			opacity: 0.68;
+		}
+	}
+</style>
