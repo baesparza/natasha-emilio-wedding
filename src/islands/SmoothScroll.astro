@@ -2,11 +2,46 @@
 /**
  * Global motion island: boots Lenis + GSAP from the shared motion module.
  * Mount once from BaseLayout. Feature animations import from `@/scripts/motion`.
+ * Also routes same-page hash links through Lenis for smooth scroll.
  */
 ---
 
 <script>
-	import { initMotion } from '@/scripts/motion';
+	import { $ } from '@/scripts/dom';
+	import {
+		HASH_SCROLL_DURATION,
+		initMotion,
+		prefersReducedMotion,
+		scrollTo,
+	} from '@/scripts/motion';
 
 	initMotion();
+
+	document.addEventListener('click', (event) => {
+		const target = event.target;
+		if (!(target instanceof Element)) return;
+
+		const anchor = target.closest('a[href^="#"]');
+		if (!(anchor instanceof HTMLAnchorElement)) return;
+
+		const { hash } = anchor;
+		if (!hash || hash === '#') return;
+
+		const destination = $(hash);
+		if (!(destination instanceof HTMLElement)) return;
+
+		if (anchor.pathname !== window.location.pathname) return;
+
+		event.preventDefault();
+
+		const offset = -(parseFloat(getComputedStyle(destination).scrollMarginTop) || 0);
+
+		scrollTo(destination, {
+			offset,
+			duration: HASH_SCROLL_DURATION,
+			immediate: prefersReducedMotion(),
+		});
+
+		history.pushState(null, '', hash);
+	});
 </script>

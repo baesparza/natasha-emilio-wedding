@@ -92,10 +92,13 @@ export function getLenis(): Lenis | null {
 	return lenis;
 }
 
+/** Duration (seconds) for same-page hash link smooth scrolls. */
+export const HASH_SCROLL_DURATION = 3;
+
 /** Smooth-scroll via Lenis when active; otherwise native scroll. */
 export function scrollTo(
 	target: string | number | HTMLElement,
-	options?: { offset?: number; immediate?: boolean },
+	options?: { offset?: number; immediate?: boolean; duration?: number },
 ): void {
 	if (lenis) {
 		lenis.scrollTo(target, options);
