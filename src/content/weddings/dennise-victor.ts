@@ -10,7 +10,7 @@ export const denniseVictor: Wedding = {
 	seo: {
 		title: 'Dennise & Victor',
 		description:
-			'Te invitamos a celebrar la boda de Dennise y Victor el 15 de octubre de 2026 en Cuenca.',
+			'Te invitamos a celebrar la boda de Dennise y Victor el sábado 17 de octubre de 2026 en Cuenca.',
 		ogImage: '/weddings/dennise-victor/photo-closeup.png',
 	},
 	theme: {
@@ -29,21 +29,21 @@ export const denniseVictor: Wedding = {
 	hero: {
 		image: '/weddings/dennise-victor/photo-gazebo.png',
 		imageAlt: 'Dennise y Victor tomados de las manos frente al lago',
-		eyebrow: '15 · 10 · 2026',
-		headline: 'Sí, quiero, para toda la vida',
+		eyebrow: '17 · 10 · 2026',
+		headline: 'Sí quiero, para toda la vida',
 	},
 	quote: {
-		lead: 'Encontrarte fue el destino',
-		close: 'elegirte cada día es el amor',
+		lead: 'Amar es seguir eligiéndonos cada día',
+		close: 'el resto de nuestras vidas',
 	},
 	event: {
 		invitationLead: 'Nos complace invitarte',
 		invitationClose: 'a nuestra boda',
 		venue: 'Quinta Margarita',
 		address: 'Calle del Perejil, Cuenca',
-		dateLabel: '15 de octubre, 2026',
-		startsAt: '2026-10-15T17:00:00-05:00',
-		endsAt: '2026-10-16T00:00:00-05:00',
+		dateLabel: 'Sábado 17 de octubre, 2026',
+		startsAt: '2026-10-17T17:00:00-05:00',
+		endsAt: '2026-10-18T00:00:00-05:00',
 		ceremonyLabel: 'Ceremonia · 5:00 PM',
 		receptionLabel: 'Recepción · 8:00 PM',
 		mapImage: '/weddings/dennise-victor/mapa.png',
@@ -71,16 +71,11 @@ export const denniseVictor: Wedding = {
 		guests:
 			'Queremos celebrar nuestro amor con un aforo limitado. La invitación es exclusiva para ti.',
 		dressCode: {
-			description: 'Mira la paleta de colores para celebrar juntos.',
-			examplesUrl: 'https://www.canva.com/design/DAGM1ibWDwM/bwtkCN3ETfjT66La7QiXXQ/edit',
-			colors: [
-				{ name: 'Cacao', value: '#786252' },
-				{ name: 'Canela', value: '#a87861' },
-				{ name: 'Arena', value: '#c9ac8d' },
-				{ name: 'Olivo', value: '#4c4831' },
-			],
+			description: 'Formal.',
 		},
-		reservedColorMessage: 'Estamos reservando el blanco y parecidos solo para la novia.',
+		reservedColorMessage:
+			'Te pedimos evitar el color cacao; está reservado para las damas de honor.',
+		reservedColor: { name: 'Cacao', value: '#786252' },
 	},
 	interlude: {
 		image: '/weddings/dennise-victor/photo-dock.png',
@@ -90,13 +85,14 @@ export const denniseVictor: Wedding = {
 	gift: {
 		heading: 'Si deseas obsequiarnos algo, lo recibiremos con mucho cariño',
 		description:
-			'Tu presencia es el mejor regalo; cualquier detalle adicional será una bendición para nuestro comienzo.',
-		bank: 'Cuenta de ahorros · Banco (por confirmar)',
-		accountNumber: '0000000000',
-		accountType: 'Cuenta compartida',
-		holders: [
-			{ name: 'Dennise', id: 'CI: por confirmar' },
-			{ name: 'Victor', id: 'CI: por confirmar' },
+			'Para tu comodidad puedes realizarlo mediante sobre cerrado o cualquiera de las siguientes cuentas.',
+		holders: [{ name: 'Víctor Hugo Feijóo Romero', id: 'CI: 0707106381' }],
+		email: 'yugo_16_96@hotmail.com',
+		accounts: [
+			{ bank: 'Banco Pichincha', accountNumber: '2206018966', accountType: 'ahorros' },
+			{ bank: 'Coop. JEP', accountNumber: '406158288900', accountType: 'ahorros' },
+			{ bank: 'Banco Guayaquil', accountNumber: '0056568463', accountType: 'ahorros' },
+			{ bank: 'Produbanco', accountNumber: '12072095585', accountType: 'ahorros' },
 		],
 	},
 	rsvp: {

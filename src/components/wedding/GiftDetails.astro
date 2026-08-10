@@ -6,11 +6,16 @@ interface Props {
 }
 
 const { gift } = Astro.props;
+const accounts = gift.accounts ?? [];
+const holders = gift.holders;
+const primaryHolder = holders[0];
+const secondaryHolder = holders[1];
+const hasMultiAccounts = accounts.length > 0;
 ---
 
 <section class="bg-wedding-surface py-section">
 	<div class="px-gutter mx-auto max-w-6xl text-center">
-		<h2 class="text-wedding-rosewood mx-auto max-w-2xl text-3xl text-balance">
+		<h2 class="text-wedding-lavender mx-auto max-w-2xl text-3xl text-balance">
 			{gift.heading}
 		</h2>
 		<p class="text-wedding-ink-muted mx-auto mt-6 max-w-2xl text-base font-light text-pretty">
@@ -19,7 +24,7 @@ const { gift } = Astro.props;
 
 		<div class="mx-auto mt-14 max-w-lg sm:mt-16">
 			<div
-				class="gift-card border-wedding-olive relative border p-px shadow-[0_12px_40px_-12px_rgb(16_16_16/28%),0_2px_8px_-2px_rgb(16_16_16/10%)]"
+				class="gift-card border-wedding-lavender relative border p-px shadow-[0_12px_40px_-12px_rgb(16_16_16/28%),0_2px_8px_-2px_rgb(16_16_16/10%)]"
 			>
 				<!-- Decorative corner accents -->
 				<span class="gift-corner gift-corner--tl" aria-hidden="true"></span>
@@ -28,23 +33,66 @@ const { gift } = Astro.props;
 				<span class="gift-corner gift-corner--br" aria-hidden="true"></span>
 
 				<div class="bg-wedding-surface relative z-10 px-6 py-12 text-center sm:px-10">
-					<p class="text-xl font-medium">{gift.bank}</p>
-					<p class="mt-6 text-base">
-						Nro. de cuenta: <strong>{gift.accountNumber}</strong>
-					</p>
-					<p class="text-wedding-ink-muted mt-1 text-sm">{gift.accountType}</p>
+					{
+						hasMultiAccounts ? (
+							<>
+								{primaryHolder && (
+									<div>
+										<strong class="text-lg">{primaryHolder.name}</strong>
+										<p class="text-wedding-ink-muted mt-1 text-sm">{primaryHolder.id}</p>
+										{gift.email && (
+											<p class="text-wedding-ink-muted mt-1 text-sm">{gift.email}</p>
+										)}
+									</div>
+								)}
 
-					<div class="mt-8 grid gap-6 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-						<div>
-							<strong>{gift.holders[0].name}</strong>
-							<p class="text-sm">{gift.holders[0].id}</p>
-						</div>
-						<span class="font-label text-wedding-rosewood text-4xl" aria-hidden="true">&</span>
-						<div>
-							<strong>{gift.holders[1].name}</strong>
-							<p class="text-sm">{gift.holders[1].id}</p>
-						</div>
-					</div>
+								<ul class="mt-10 space-y-5 text-left">
+									{accounts.map((account) => (
+										<li class="border-wedding-lavender/25 border-t pt-5 first:border-t-0 first:pt-0">
+											<p class="font-label text-wedding-lavender text-sm tracking-[0.1em] uppercase">
+												{account.bank}
+											</p>
+											<p class="mt-2 text-base">
+												<strong>{account.accountNumber}</strong>
+												<span class="text-wedding-ink-muted"> ({account.accountType})</span>
+											</p>
+										</li>
+									))}
+								</ul>
+							</>
+						) : (
+							<>
+								<p class="text-xl font-medium">{gift.bank}</p>
+								<p class="mt-6 text-base">
+									Nro. de cuenta: <strong>{gift.accountNumber}</strong>
+								</p>
+								<p class="text-wedding-ink-muted mt-1 text-sm">{gift.accountType}</p>
+
+								{primaryHolder && secondaryHolder ? (
+									<div class="mt-8 grid gap-6 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+										<div>
+											<strong>{primaryHolder.name}</strong>
+											<p class="text-sm">{primaryHolder.id}</p>
+										</div>
+										<span class="font-label text-wedding-lavender text-4xl" aria-hidden="true">
+											&
+										</span>
+										<div>
+											<strong>{secondaryHolder.name}</strong>
+											<p class="text-sm">{secondaryHolder.id}</p>
+										</div>
+									</div>
+								) : (
+									primaryHolder && (
+										<div class="mt-8">
+											<strong>{primaryHolder.name}</strong>
+											<p class="text-sm">{primaryHolder.id}</p>
+										</div>
+									)
+								)}
+							</>
+						)
+					}
 				</div>
 			</div>
 		</div>
@@ -62,7 +110,7 @@ const { gift } = Astro.props;
 		z-index: 20;
 		width: 3.25rem;
 		height: 3.25rem;
-		background: var(--color-olive);
+		background: var(--color-lavender);
 	}
 
 	.gift-corner--tl {

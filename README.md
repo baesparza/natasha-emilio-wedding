@@ -36,37 +36,41 @@ repository — do not import a specific wedding file from UI code.
 
 ### Required fields
 
-| Field                                      | Purpose                                                                                                                                        |
-| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| `slug`                                     | Tenant id (URL query / future subdomain)                                                                                                       |
-| `locale`                                   | HTML `lang` (e.g. `es`)                                                                                                                        |
-| `couple.primaryName` / `secondaryName`     | Names shown in hero and event details                                                                                                          |
-| `seo.title` / `description` / `ogImage`    | Meta + Open Graph                                                                                                                              |
-| `theme.colors`                             | Palette CSS tokens (`lavender`, `rosewood`, `beige`, `olive`, `bride`, `ink`, `inkMuted`, `inkStrong`, `surface`)                              |
-| `hero`                                     | Full-bleed opener: `image`, `imageAlt`, `eyebrow`, `headline`, optional `logo`                                                                 |
-| `quote.lead` / `close`                     | Two-part quote block                                                                                                                           |
-| `event.invitationLead` / `invitationClose` | Invitation copy                                                                                                                                |
-| `event.venue` / `address`                  | Location labels                                                                                                                                |
-| `event.dateLabel`                          | Display date string                                                                                                                            |
-| `event.startsAt` / `endsAt`                | ISO datetimes for calendar + structured data                                                                                                   |
-| `event.ceremonyLabel` / `receptionLabel`   | Time lines under date                                                                                                                          |
-| `indications`                              | Guest notes: `heading`, `children` (`title`, `body`), `guests`, `dressCode` (`description`, `examplesUrl`, `colors[]`), `reservedColorMessage` |
-| `interlude`                                | Mid-page image: `image`, `imageAlt`, `caption`                                                                                                 |
-| `gift`                                     | Bank gift block: `heading`, `description`, `bank`, `accountNumber`, `accountType`, `holders` (exactly two `{ name, id }`)                      |
-| `rsvp.deadline`                            | RSVP deadline copy                                                                                                                             |
-| `credits.text` / `phone`                   | Footer credit line                                                                                                                             |
+| Field                                      | Purpose                                                                                                                                                                                   |
+| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`                                     | Tenant id (URL query / future subdomain)                                                                                                                                                  |
+| `locale`                                   | HTML `lang` (e.g. `es`)                                                                                                                                                                   |
+| `couple.primaryName` / `secondaryName`     | Names shown in hero and event details                                                                                                                                                     |
+| `seo.title` / `description` / `ogImage`    | Meta + Open Graph                                                                                                                                                                         |
+| `theme.colors`                             | Palette CSS tokens (`lavender`, `rosewood`, `beige`, `olive`, `bride`, `ink`, `inkMuted`, `inkStrong`, `surface`)                                                                         |
+| `hero`                                     | Full-bleed opener: `image`, `imageAlt`, `eyebrow`, `headline`, optional `logo`                                                                                                            |
+| `quote.lead` / `close`                     | Two-part quote block                                                                                                                                                                      |
+| `event.invitationLead` / `invitationClose` | Invitation copy                                                                                                                                                                           |
+| `event.venue` / `address`                  | Location labels                                                                                                                                                                           |
+| `event.dateLabel`                          | Display date string                                                                                                                                                                       |
+| `event.startsAt` / `endsAt`                | ISO datetimes for calendar + structured data                                                                                                                                              |
+| `event.ceremonyLabel` / `receptionLabel`   | Time lines under date                                                                                                                                                                     |
+| `indications`                              | Guest notes: `heading`, `children` (`title`, `body`), `guests`, `dressCode` (`description`, optional `examplesUrl` / `colors[]`), `reservedColorMessage`, optional `reservedColor` swatch |
+| `interlude`                                | Mid-page image: `image`, `imageAlt`, `caption`                                                                                                                                            |
+| `gift`                                     | Gift block: `heading`, `description`, `holders[]`; either single-bank (`bank`, `accountNumber`, `accountType`) or `accounts[]` (+ optional `email`)                                       |
+| `rsvp.deadline`                            | RSVP deadline copy                                                                                                                                                                        |
+| `credits.text` / `phone`                   | Footer credit line                                                                                                                                                                        |
 
 Image paths are public URLs (e.g. `/weddings/natasha-emilio/hero.jpg`).
 
 ### Optional fields
 
-| Field                | Behavior when omitted                                 |
-| :------------------- | :---------------------------------------------------- |
-| `event.travel`       | Hides the travel / lodging block                      |
-| `event.travel.note`  | Heading (and stays, if any) still show; no paragraph  |
-| `event.travel.stays` | No lodging phone list                                 |
-| `event.places`       | Renders ceremony/reception venue details when present |
-| `hero.logo`          | Shows a tenant monogram above the hero when present   |
+| Field                               | Behavior when omitted                                          |
+| :---------------------------------- | :------------------------------------------------------------- |
+| `event.travel`                      | Hides the travel / lodging block                               |
+| `event.travel.note`                 | Heading (and stays, if any) still show; no paragraph           |
+| `event.travel.stays`                | No lodging phone list                                          |
+| `event.places`                      | Renders ceremony/reception venue details when present          |
+| `hero.logo`                         | Shows a tenant monogram above the hero when present            |
+| `indications.dressCode.colors`      | Hides the dress-code palette                                   |
+| `indications.dressCode.examplesUrl` | Hides the “examples” link                                      |
+| `indications.reservedColor`         | Uses bridal-white swatch labeled “Reservado”                   |
+| `gift.accounts` / `gift.email`      | Uses single-bank card (`bank`, `accountNumber`, `accountType`) |
 
 When `travel` is present, `heading` is required. Example:
 

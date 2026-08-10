@@ -77,10 +77,14 @@ export interface Wedding {
 		guests: string;
 		dressCode: {
 			description: string;
-			examplesUrl: string;
-			colors: Array<{ name: string; value: string }>;
+			/** Outfit examples link. Omit when dress code is text-only. */
+			examplesUrl?: string;
+			/** Suggested palette. Omit or leave empty for formal / no-palette dress codes. */
+			colors?: Array<{ name: string; value: string }>;
 		};
 		reservedColorMessage: string;
+		/** Swatch shown with the reserved-color note. Defaults to bridal white. */
+		reservedColor?: { name: string; value: string };
 	};
 	interlude: {
 		image: string;
@@ -90,10 +94,14 @@ export interface Wedding {
 	gift: {
 		heading: string;
 		description: string;
-		bank: string;
-		accountNumber: string;
-		accountType: string;
-		holders: [{ name: string; id: string }, { name: string; id: string }];
+		/** Single-bank layout (Natasha). Prefer `accounts` when listing several. */
+		bank?: string;
+		accountNumber?: string;
+		accountType?: string;
+		holders: Array<{ name: string; id: string }>;
+		email?: string;
+		/** Multi-bank transfer list. When set, replaces the single-bank card body. */
+		accounts?: Array<{ bank: string; accountNumber: string; accountType: string }>;
 	};
 	rsvp: {
 		deadline: string;

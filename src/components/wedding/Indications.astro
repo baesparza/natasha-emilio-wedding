@@ -8,6 +8,10 @@ interface Props {
 const { indications } = Astro.props;
 
 const rules = [indications.children, { title: 'Invitados', body: indications.guests }] as const;
+const dressColors = indications.dressCode.colors ?? [];
+const examplesUrl = indications.dressCode.examplesUrl;
+const reservedSwatch = indications.reservedColor ?? { name: 'Reservado', value: undefined };
+const reservedIsCustom = Boolean(indications.reservedColor);
 ---
 
 <!-- Attendance rules -->
@@ -49,41 +53,52 @@ const rules = [indications.children, { title: 'Invitados', body: indications.gue
 				{indications.dressCode.description}
 			</p>
 
-			<ul
-				class="mx-auto mt-10 grid max-w-xs grid-cols-2 gap-3 sm:max-w-2xl sm:grid-cols-4 sm:gap-4"
-				aria-label="Paleta de colores del dress code"
-			>
-				{
-					indications.dressCode.colors.map((color) => (
-						<li>
-							<figure class="bg-wedding-surface ring-wedding-ink/12 aspect-[3/4] overflow-hidden shadow-[0_2px_8px_rgba(16,16,16,0.08)] ring-1">
-								<div class="h-[72%] w-full" style={`background-color: ${color.value}`} />
-								<figcaption class="bg-wedding-surface flex h-[28%] items-center px-3 text-left sm:px-3.5">
-									<p class="font-label text-wedding-ink-strong text-sm leading-tight font-medium tracking-[0.06em] sm:text-base">
-										{color.name}
-									</p>
-								</figcaption>
-							</figure>
-						</li>
-					))
-				}
-			</ul>
+			{
+				dressColors.length > 0 && (
+					<ul
+						class="mx-auto mt-10 grid max-w-xs grid-cols-2 gap-3 sm:max-w-2xl sm:grid-cols-4 sm:gap-4"
+						aria-label="Paleta de colores del dress code"
+					>
+						{dressColors.map((color) => (
+							<li>
+								<figure class="bg-wedding-surface ring-wedding-ink/12 aspect-[3/4] overflow-hidden shadow-[0_2px_8px_rgba(16,16,16,0.08)] ring-1">
+									<div class="h-[72%] w-full" style={`background-color: ${color.value}`} />
+									<figcaption class="bg-wedding-surface flex h-[28%] items-center px-3 text-left sm:px-3.5">
+										<p class="font-label text-wedding-ink-strong text-sm leading-tight font-medium tracking-[0.06em] sm:text-base">
+											{color.name}
+										</p>
+									</figcaption>
+								</figure>
+							</li>
+						))}
+					</ul>
+				)
+			}
 
-			<a
-				href={indications.dressCode.examplesUrl}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="text-wedding-ink-muted decoration-wedding-rosewood mt-10 inline-flex items-center gap-2 text-sm font-medium tracking-[0.08em] uppercase underline underline-offset-4 transition-transform hover:translate-x-1"
-			>
-				<span aria-hidden="true">→</span>
-				Mira los siguientes ejemplos
-			</a>
+			{
+				examplesUrl && (
+					<a
+						href={examplesUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-wedding-ink-muted decoration-wedding-rosewood mt-10 inline-flex items-center gap-2 text-sm font-medium tracking-[0.08em] uppercase underline underline-offset-4 transition-transform hover:translate-x-1"
+					>
+						<span aria-hidden="true">→</span>
+						Mira los siguientes ejemplos
+					</a>
+				)
+			}
 		</div>
 	</div>
 </section>
 
-<!-- Reserved bridal color -->
-<section class="bg-wedding-lavender px-gutter py-[clamp(3.5rem,9vw,5.5rem)]">
+<!-- Reserved / avoid color -->
+<section
+	class:list={[
+		'px-gutter py-[clamp(3.5rem,9vw,5.5rem)]',
+		reservedIsCustom ? 'bg-wedding-olive' : 'bg-wedding-lavender',
+	]}
+>
 	<div class="mx-auto flex max-w-md flex-col items-center gap-8 text-center">
 		<p
 			class="font-label text-wedding-surface decoration-wedding-surface text-xl text-balance underline underline-offset-4"
@@ -94,12 +109,16 @@ const rules = [indications.children, { title: 'Invitados', body: indications.gue
 			class="bg-wedding-surface ring-wedding-surface/50 aspect-[3/4] w-32 overflow-hidden shadow-[0_2px_8px_rgba(16,16,16,0.1)] ring-1 sm:w-36"
 			aria-hidden="true"
 		>
-			<div class="bg-wedding-bride h-[72%] w-full"></div>
+			<div
+				class:list={['h-[72%] w-full', !reservedIsCustom && 'bg-wedding-bride']}
+				style={reservedIsCustom ? `background-color: ${reservedSwatch.value}` : undefined}
+			>
+			</div>
 			<figcaption class="bg-wedding-surface flex h-[28%] items-center px-3 text-left">
 				<p
 					class="font-label text-wedding-ink-strong text-sm leading-tight font-medium tracking-[0.06em] sm:text-base"
 				>
-					Reservado
+					{reservedSwatch.name}
 				</p>
 			</figcaption>
 		</figure>
