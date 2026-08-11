@@ -9,17 +9,21 @@ const { rsvp } = Astro.props;
 ---
 
 <section id="rsvp" class="bg-wedding-surface py-section scroll-mt-6" aria-labelledby="rsvp-title">
-	<div class="px-gutter mx-auto max-w-2xl text-center">
-		<h2 id="rsvp-title" class="font-script text-wedding-ink-muted text-8xl leading-[0.75]">
+	<div class="px-gutter mx-auto max-w-2xl text-center" data-reveal-stagger>
+		<h2
+			id="rsvp-title"
+			class="font-script text-wedding-ink-muted text-8xl leading-[0.75]"
+			data-reveal
+		>
 			<span class="-ml-12 block">
 				<span class="text-wedding-rosewood text-9xl"> T </span><span class="-ml-2"> e </span>
 			</span>
 			<span class="block"> invitamos </span>
 			<span class="mt-2 block text-xl"> a nuestra boda </span>
 		</h2>
-		<p class="text-wedding-ink-muted mt-10 text-base">{rsvp.deadline}</p>
+		<p class="text-wedding-ink-muted mt-10 text-base" data-reveal>{rsvp.deadline}</p>
 
-		<form id="rsvp-form" class="mx-auto mt-8 grid max-w-xl gap-5 text-left" novalidate>
+		<form id="rsvp-form" class="mx-auto mt-8 grid max-w-xl gap-5 text-left" novalidate data-reveal>
 			<div>
 				<label class="text-sm font-semibold" for="rsvp-name"> Nombre completo </label>
 				<input

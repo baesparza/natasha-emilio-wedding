@@ -6,11 +6,13 @@
 	import { $$ } from '@/scripts/dom';
 	import { gsap, initMotion, prefersReducedMotion } from '@/scripts/motion';
 
+	const PARALLAX_SELECTOR = '[data-parallax]';
+
 	initMotion();
 
 	if (!prefersReducedMotion())
 		requestAnimationFrame(() => {
-			$$<HTMLElement>('[data-parallax]').forEach((image) => {
+			$$<HTMLElement>(PARALLAX_SELECTOR).forEach((image) => {
 				const frame = image.parentElement;
 				if (!frame) return;
 

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ImageParallax from '../islands/ImageParallax.astro';
+import ScrollReveal from '../islands/ScrollReveal.astro';
 import SmoothScroll from '../islands/SmoothScroll.astro';
 import Seo from '../components/Seo.astro';
 import type { ImageMetadata } from 'astro';
@@ -97,6 +98,7 @@ const themeStyle = theme
 		<!-- Global motion islands -->
 		<SmoothScroll />
 		<ImageParallax />
+		<ScrollReveal />
 		<slot name="islands" />
 	</body>
 </html>

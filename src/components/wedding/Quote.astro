@@ -18,13 +18,14 @@ const fullText = `${quote.lead} ${quote.close}`;
 			“
 		</span>
 
-		<blockquote class="relative pt-[clamp(3.5rem,10vw,5.5rem)]">
+		<blockquote class="relative pt-[clamp(3.5rem,10vw,5.5rem)]" data-reveal-stagger>
 			<!-- sr-only full line; decorative lead + script close -->
 			<p class="sr-only">{fullText}</p>
 
 			<p
 				class="text-wedding-ink-muted mx-auto max-w-[24ch] font-serif text-5xl leading-[1.35] text-balance italic"
 				aria-hidden="true"
+				data-reveal
 			>
 				{quote.lead}
 			</p>
@@ -32,6 +33,7 @@ const fullText = `${quote.lead} ${quote.close}`;
 			<p
 				class="font-script text-wedding-olive mx-auto mt-[clamp(1.5rem,4vw,2.5rem)] max-w-[min(22rem,94%)] text-6xl leading-[1.15] text-balance"
 				aria-hidden="true"
+				data-reveal
 			>
 				{quote.close}
 			</p>

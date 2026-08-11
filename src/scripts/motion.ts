@@ -9,11 +9,11 @@
  *
  * if (prefersReducedMotion()) return
  *
- * gsap.from('.hero-title', {
+ * gsap.from('[data-reveal]', {
  *   opacity: 0,
  *   y: 32,
  *   duration: 1,
- *   scrollTrigger: { trigger: '.hero', start: 'top 75%' },
+ *   scrollTrigger: { start: 'top 85%' },
  * })
  *
  * getLenis()?.scrollTo('#rsvp', { offset: -24 })
@@ -75,6 +75,7 @@ export function initMotion(): Lenis | null {
 export function destroyMotion(): void {
 	ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 	gsap.set($$<HTMLElement>('[data-parallax]'), { clearProps: 'transform' });
+	gsap.set($$<HTMLElement>('[data-reveal]'), { clearProps: 'opacity,transform' });
 
 	if (!lenis) {
 		booted = false;

@@ -1,0 +1,54 @@
+---
+/** One-time editorial fades for elements that opt into data-reveal markup. */
+---
+
+<script>
+	import { $$ } from '@/scripts/dom';
+	import { gsap, initMotion, prefersReducedMotion } from '@/scripts/motion';
+
+	const REVEAL_STAGGER_SELECTOR = '[data-reveal-stagger]';
+	const REVEAL_SELECTOR = '[data-reveal]';
+
+	initMotion();
+
+	if (!prefersReducedMotion())
+		requestAnimationFrame(() => {
+			const staggeredTargets = new Set<HTMLElement>();
+
+			$$<HTMLElement>(REVEAL_STAGGER_SELECTOR).forEach((group) => {
+				const targets = $$<HTMLElement>(REVEAL_SELECTOR, group);
+				if (!targets.length) return;
+
+				targets.forEach((target) => staggeredTargets.add(target));
+
+				gsap.from(targets, {
+					opacity: 0,
+					y: 28,
+					duration: 0.9,
+					ease: 'power2.out',
+					stagger: 0.12,
+					scrollTrigger: {
+						trigger: group,
+						start: 'top 85%',
+						toggleActions: 'play none none none',
+					},
+				});
+			});
+
+			$$<HTMLElement>(REVEAL_SELECTOR)
+				.filter((target) => !staggeredTargets.has(target))
+				.forEach((target) => {
+					gsap.from(target, {
+						opacity: 0,
+						y: 28,
+						duration: 0.9,
+						ease: 'power2.out',
+						scrollTrigger: {
+							trigger: target,
+							start: 'top 85%',
+							toggleActions: 'play none none none',
+						},
+					});
+				});
+		});
+</script>

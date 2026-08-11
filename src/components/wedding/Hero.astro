@@ -16,14 +16,16 @@ const { hero, couple, music } = Astro.props;
 	<div class="mx-auto max-w-6xl">
 		{
 			hero.logo && (
-				<OptimizedImage
-					src={hero.logo}
-					alt={`Monograma de ${couple.primaryName} y ${couple.secondaryName}`}
-					class="w-20 sm:w-24"
-					widths={[80, 160, 240]}
-					sizes="96px"
-					pictureClass="block"
-				/>
+				<div data-reveal>
+					<OptimizedImage
+						src={hero.logo}
+						alt={`Monograma de ${couple.primaryName} y ${couple.secondaryName}`}
+						class="w-20 sm:w-24"
+						widths={[80, 160, 240]}
+						sizes="96px"
+						pictureClass="block"
+					/>
+				</div>
 			)
 		}
 		<!-- TODO: Request or create a monogram for tenants without a logo. -->
@@ -50,12 +52,14 @@ const { hero, couple, music } = Astro.props;
 
 			<div
 				class="border-wedding-lavender/20 bg-wedding-surface relative -mt-12 ml-[10%] max-w-xl border px-6 py-9 text-center sm:px-10 sm:py-12 lg:mt-0 lg:ml-0 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:text-left"
+				data-reveal-stagger
 			>
-				<p class="text-wedding-olive mb-5 text-sm font-semibold tracking-[0.28em]">
+				<p class="text-wedding-olive mb-5 text-sm font-semibold tracking-[0.28em]" data-reveal>
 					{hero.eyebrow}
 				</p>
 				<h1
 					class="font-script text-wedding-ink-muted mx-auto max-w-[12ch] text-8xl leading-[0.94] lg:mx-0"
+					data-reveal
 				>
 					{hero.headline}
 				</h1>
@@ -63,10 +67,11 @@ const { hero, couple, music } = Astro.props;
 					<a
 						href="#celebracion"
 						class="text-wedding-rosewood decoration-wedding-rosewood inline-flex text-sm font-semibold tracking-[0.18em] uppercase underline underline-offset-8"
+						data-reveal
 					>
 						Más información
 					</a>
-					{music && <MusicToggle music={music} />}
+					{music && <MusicToggle music={music} data-reveal />}
 				</div>
 			</div>
 		</div>

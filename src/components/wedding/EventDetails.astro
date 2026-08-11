@@ -27,7 +27,7 @@ const buttonClass =
 	<div
 		class="px-gutter mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(28rem,1.3fr)] lg:items-start lg:gap-14"
 	>
-		<article class="relative flex flex-col text-center lg:text-left">
+		<article class="relative flex flex-col text-center lg:text-left" data-reveal>
 			<p class="font-label text-wedding-olive text-4xl italic">
 				<span class="text-wedding-lavender">{couple.primaryName.toUpperCase()}</span>
 				<span class="text-wedding-rosewood/70 mx-2 not-italic" aria-hidden="true">·</span>
@@ -165,6 +165,7 @@ const buttonClass =
 			rel="noopener noreferrer"
 			class="group bg-wedding-lavender relative block aspect-square overflow-hidden focus-visible:outline-offset-4"
 			aria-label={`Ver mapa de ${event.venue} en Google Maps`}
+			data-reveal
 		>
 			<OptimizedImage
 				src={event.mapImage}

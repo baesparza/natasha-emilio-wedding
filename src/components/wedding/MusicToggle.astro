@@ -5,14 +5,14 @@ interface Props {
 	music: NonNullable<Wedding['music']>;
 }
 
-const { music } = Astro.props;
+const { music, ...props } = Astro.props;
 const trackLabel = music.title ? `: ${music.title}` : '';
 ---
 
-<div id="music-toggle-container" class="music-toggle inline-flex">
+<div id="music-toggle-container" class="music-toggle inline-flex" {...props}>
 	<button
 		id="music-toggle"
-		class="music-toggle__button border-wedding-lavender bg-wedding-surface/90 text-wedding-ink-muted flex size-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors hover:bg-wedding-surface focus-visible:outline-none"
+		class="music-toggle__button border-wedding-lavender bg-wedding-surface/90 text-wedding-ink-muted hover:bg-wedding-surface flex size-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors focus-visible:outline-none"
 		type="button"
 		aria-label={`Reproducir música${trackLabel}`}
 		aria-pressed="false"
@@ -28,9 +28,10 @@ const trackLabel = music.title ? `: ${music.title}` : '';
 			stroke-linejoin="round"
 			aria-hidden="true"
 		>
-			<path d="M11 5 6 9H3v6h3l5 4V5Z" />
-			<path class="music-toggle__sound" d="M15.5 9.5a3.5 3.5 0 0 1 0 5M18.5 6.5a7.5 7.5 0 0 1 0 11" />
-			<path class="music-toggle__mute" d="m16 9 5 6m0-6-5 6" />
+			<path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+			<path class="music-toggle__sound" d="M15.5 9.5a3.5 3.5 0 0 1 0 5M18.5 6.5a7.5 7.5 0 0 1 0 11"
+			></path>
+			<path class="music-toggle__mute" d="m16 9 5 6m0-6-5 6"></path>
 		</svg>
 		<span class="sr-only">Reproducir música</span>
 	</button>
@@ -109,7 +110,8 @@ const trackLabel = music.title ? `: ${music.title}` : '';
 		z-index: 50;
 	}
 
-	.music-toggle:not(.music-toggle--activated) .music-toggle__button:not(.music-toggle__button--playing) {
+	.music-toggle:not(.music-toggle--activated)
+		.music-toggle__button:not(.music-toggle__button--playing) {
 		animation: music-toggle-breathe 3.6s ease-in-out infinite;
 	}
 
