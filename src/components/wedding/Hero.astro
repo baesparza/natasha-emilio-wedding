@@ -38,12 +38,13 @@ const { hero, couple, music } = Astro.props;
 				<OptimizedImage
 					src={hero.image}
 					alt={hero.imageAlt}
-					class="aspect-4/5 h-full w-full object-cover"
+					class="aspect-5/7 h-full w-full object-cover"
 					widths={[480, 720, 960, 1200]}
 					sizes="(min-width: 1024px) 42vw, 82vw"
 					pictureClass="block h-full w-full"
 					loading="eager"
 					fetchpriority="high"
+					parallax={12}
 				/>
 			</figure>
 

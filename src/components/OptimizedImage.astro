@@ -11,6 +11,7 @@ interface Props {
 	pictureClass?: string;
 	loading?: 'eager' | 'lazy';
 	fetchpriority?: 'high' | 'low' | 'auto';
+	parallax?: number;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
 	pictureClass,
 	loading = 'lazy',
 	fetchpriority = 'auto',
+	parallax,
 } = Astro.props;
 
 const placeholder = await getImage({
@@ -34,6 +36,7 @@ const placeholder = await getImage({
 
 <div
 	data-optimized-image
+	data-parallax={parallax}
 	class="bg-cover bg-center"
 	style={`background-image: url("${placeholder.src}")`}
 >

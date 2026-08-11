@@ -21,7 +21,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { $ } from './dom';
+import { $, $$ } from './dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,6 +73,9 @@ export function initMotion(): Lenis | null {
 }
 
 export function destroyMotion(): void {
+	ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+	gsap.set($$<HTMLElement>('[data-parallax]'), { clearProps: 'transform' });
+
 	if (!lenis) {
 		booted = false;
 		return;

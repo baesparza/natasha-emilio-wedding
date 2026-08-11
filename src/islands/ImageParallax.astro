@@ -1,0 +1,38 @@
+---
+/** Scroll-scrubbed editorial image movement, mounted once from BaseLayout. */
+---
+
+<script>
+	import { $$ } from '@/scripts/dom';
+	import { gsap, initMotion, prefersReducedMotion } from '@/scripts/motion';
+
+	initMotion();
+
+	if (!prefersReducedMotion())
+		requestAnimationFrame(() => {
+			$$<HTMLElement>('[data-parallax]').forEach((image) => {
+				const frame = image.parentElement;
+				if (!frame) return;
+
+				const requestedAmount = Number(image.dataset.parallax);
+				const amount = Number.isFinite(requestedAmount)
+					? Math.min(Math.max(requestedAmount, 1), 20)
+					: 8;
+
+				gsap.fromTo(
+					image,
+					{ scale: 1 + amount / 45, yPercent: -amount },
+					{
+						yPercent: amount,
+						ease: 'none',
+						scrollTrigger: {
+							trigger: frame,
+							start: 'top bottom',
+							end: 'bottom top',
+							scrub: true,
+						},
+					},
+				);
+			});
+		});
+</script>
