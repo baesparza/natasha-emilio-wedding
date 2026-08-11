@@ -57,6 +57,8 @@ export const denniseVictor: Wedding = {
 				label: 'Ceremonia',
 				name: 'Iglesia Santa Marianita del Arenal',
 				address: 'Calle Camino Viejo a Baños y Tarquino Cordero, Cuenca',
+				mapUrl:
+					'https://www.google.com/maps/search/?api=1&query=Iglesia+Santa+Marianita+del+Arenal+Camino+Viejo+a+Ba%C3%B1os+Tarquino+Cordero+Cuenca',
 			},
 			{
 				label: 'Recepción',
