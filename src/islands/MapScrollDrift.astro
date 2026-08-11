@@ -1,0 +1,74 @@
+---
+/**
+ * Scroll-driven map drift for [data-map-scroll] sections.
+ *
+ * Mounted globally in BaseLayout. Rebuilt on resize / orientation change so the
+ * breakpoint gate can live in CSS (`--map-scroll-enabled`) instead of a JS media query.
+ *
+ * What it animates:
+ *   [data-map-scroll-media] translates from the top of its section to the bottom
+ *   as the section scrolls through the viewport (faux-sticky delayed scroll).
+ *
+ * Responsive gate:
+ *   Active only when `--map-scroll-enabled` on the section reads `"1"`
+ *   (set via Tailwind, e.g. `[--map-scroll-enabled:0] lg:[--map-scroll-enabled:1]`).
+ */
+---
+
+<script>
+	import { $, $$ } from '@/scripts/dom';
+	import { gsap, initMotion, prefersReducedMotion } from '@/scripts/motion';
+
+	const SECTION_SELECTOR = '[data-map-scroll]';
+	const MEDIA_SELECTOR = '[data-map-scroll-media]';
+	const ENABLED_PROP = '--map-scroll-enabled';
+
+	function isEnabled(section: HTMLElement): boolean {
+		return getComputedStyle(section).getPropertyValue(ENABLED_PROP).trim() === '1';
+	}
+
+	function outerHeight(el: HTMLElement): number {
+		const styles = getComputedStyle(el);
+		return el.offsetHeight + parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
+	}
+
+	function buildContext(): gsap.Context {
+		return gsap.context(() => {
+			$$<HTMLElement>(SECTION_SELECTOR).forEach((section) => {
+				const media = $<HTMLElement>(MEDIA_SELECTOR, section);
+				if (!media || !isEnabled(section)) return;
+
+				gsap.fromTo(
+					media,
+					{ y: 0 },
+					{
+						y: () => Math.max(0, section.offsetHeight - outerHeight(media)),
+						ease: 'none',
+						scrollTrigger: {
+							trigger: section,
+							start: 'top bottom',
+							end: 'bottom top',
+							scrub: true,
+							invalidateOnRefresh: true,
+						},
+					},
+				);
+			});
+		});
+	}
+
+	initMotion();
+
+	if (!prefersReducedMotion() && $(SECTION_SELECTOR))
+		requestAnimationFrame(() => {
+			let ctx = buildContext();
+
+			const onResize = () => {
+				ctx.revert();
+				ctx = buildContext();
+			};
+
+			window.addEventListener('resize', onResize);
+			window.addEventListener('orientationchange', onResize);
+		});
+</script>

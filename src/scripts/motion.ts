@@ -75,6 +75,7 @@ export function initMotion(): Lenis | null {
 export function destroyMotion(): void {
 	ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 	gsap.set($$<HTMLElement>('[data-parallax]'), { clearProps: 'transform' });
+	gsap.set($$<HTMLElement>('[data-map-scroll-media]'), { clearProps: 'transform' });
 	gsap.set($$<HTMLElement>('[data-reveal]'), { clearProps: 'opacity,transform' });
 
 	if (!lenis) {

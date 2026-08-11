@@ -25,7 +25,8 @@ const buttonClass =
 
 <section id="celebracion" class="bg-wedding-surface py-section scroll-mt-6">
 	<div
-		class="px-gutter mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(28rem,1.3fr)] lg:items-start lg:gap-14"
+		class="px-gutter mx-auto grid max-w-7xl gap-14 [--map-scroll-enabled:0] lg:grid-cols-[minmax(0,0.9fr)_minmax(28rem,1.3fr)] lg:items-start lg:gap-14 lg:[--map-scroll-enabled:1]"
+		data-map-scroll
 	>
 		<article class="relative flex flex-col text-center lg:text-left" data-reveal>
 			<p class="font-label text-wedding-olive text-4xl italic">
@@ -158,24 +159,26 @@ const buttonClass =
 			</div>
 		</article>
 
-		<!-- Map -->
-		<a
-			href={event.mapUrl}
-			target="_blank"
-			rel="noopener noreferrer"
-			class="group bg-wedding-lavender relative block aspect-square overflow-hidden focus-visible:outline-offset-4"
-			aria-label={`Ver mapa de ${event.venue} en Google Maps`}
-			data-reveal
-		>
-			<OptimizedImage
-				src={event.mapImage}
-				alt={`Mapa para llegar a ${event.venue}`}
-				class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-				widths={[320, 640, 960]}
-				sizes="(min-width: 1024px) 50vw, 100vw"
-				pictureClass="block h-full w-full"
-				loading="lazy"
-			/>
-		</a>
+		<!-- Map: reveal on wrapper so scroll-drift can own transform on the link -->
+		<div data-reveal>
+			<a
+				href={event.mapUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group bg-wedding-lavender '[--sic-text-scroll-enabled:0] md:[--sic-text-scroll-enabled:1]' relative block aspect-square overflow-hidden focus-visible:outline-offset-4"
+				aria-label={`Ver mapa de ${event.venue} en Google Maps`}
+				data-map-scroll-media
+			>
+				<OptimizedImage
+					src={event.mapImage}
+					alt={`Mapa para llegar a ${event.venue}`}
+					class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+					widths={[320, 640, 960]}
+					sizes="(min-width: 1024px) 50vw, 100vw"
+					pictureClass="block h-full w-full"
+					loading="lazy"
+				/>
+			</a>
+		</div>
 	</div>
 </section>
