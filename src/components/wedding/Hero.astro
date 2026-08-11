@@ -63,15 +63,14 @@ const { hero, couple, music } = Astro.props;
 				>
 					{hero.headline}
 				</h1>
-				<div class="mt-9 flex flex-col items-center gap-5 lg:items-start">
+				<div class="mt-9 flex flex-col items-center gap-5 lg:items-start" data-reveal>
 					<a
 						href="#celebracion"
 						class="text-wedding-rosewood decoration-wedding-rosewood inline-flex text-sm font-semibold tracking-[0.18em] uppercase underline underline-offset-8"
-						data-reveal
 					>
 						Más información
 					</a>
-					{music && <MusicToggle music={music} data-reveal />}
+					{music && <MusicToggle music={music} />}
 				</div>
 			</div>
 		</div>

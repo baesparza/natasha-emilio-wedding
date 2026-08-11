@@ -5,11 +5,11 @@ interface Props {
 	music: NonNullable<Wedding['music']>;
 }
 
-const { music, ...props } = Astro.props;
+const { music } = Astro.props;
 const trackLabel = music.title ? `: ${music.title}` : '';
 ---
 
-<div id="music-toggle-container" class="music-toggle inline-flex" {...props}>
+<div id="music-toggle-container" class="music-toggle inline-flex">
 	<button
 		id="music-toggle"
 		class="music-toggle__button border-wedding-lavender bg-wedding-surface/90 text-wedding-ink-muted hover:bg-wedding-surface flex size-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors focus-visible:outline-none"
@@ -46,6 +46,22 @@ const trackLabel = music.title ? `: ${music.title}` : '';
 	const audio = $<HTMLAudioElement>('#wedding-music');
 	let wasPlayingBeforeHidden = false;
 
+	/** Leave the hero flow so fixed positioning is not trapped by GSAP transforms. */
+	const pinToViewport = () => {
+		if (!toggleContainer || toggleContainer.classList.contains('music-toggle--activated')) return;
+
+		const spacer = document.createElement('span');
+		spacer.className = 'music-toggle-spacer inline-flex size-11 shrink-0';
+		spacer.setAttribute('aria-hidden', 'true');
+		toggleContainer.before(spacer);
+
+		toggleContainer.style.removeProperty('transform');
+		toggleContainer.style.removeProperty('translate');
+		toggleContainer.style.removeProperty('opacity');
+		toggleContainer.classList.add('music-toggle--activated');
+		document.body.appendChild(toggleContainer);
+	};
+
 	const syncState = (isPlaying: boolean) => {
 		if (!toggle) return;
 
@@ -54,7 +70,7 @@ const trackLabel = music.title ? `: ${music.title}` : '';
 		toggle.setAttribute('aria-label', `${action} música`);
 		toggle.setAttribute('title', `${action} música`);
 		toggle.classList.toggle('music-toggle__button--playing', isPlaying);
-		if (isPlaying) toggleContainer?.classList.add('music-toggle--activated');
+		if (isPlaying) pinToViewport();
 	};
 
 	if (audio && toggle) {
@@ -98,12 +114,6 @@ const trackLabel = music.title ? `: ${music.title}` : '';
 
 <style>
 	.music-toggle--activated {
-		display: inline-flex;
-		width: 2.75rem;
-		height: 2.75rem;
-	}
-
-	.music-toggle--activated .music-toggle__button {
 		position: fixed;
 		top: var(--space-gutter);
 		right: var(--space-gutter);
