@@ -52,7 +52,7 @@ repository — do not import a specific wedding file from UI code.
 | `event.dateLabel`                          | Display date string                                                                                                                                                                       |
 | `event.startsAt` / `endsAt`                | ISO datetimes for calendar + structured data                                                                                                                                              |
 | `event.ceremonyLabel` / `receptionLabel`   | Time lines under date                                                                                                                                                                     |
-| `indications`                              | Guest notes: `heading`, `children` (`title`, `body`), `guests`, `dressCode` (`description`, optional `examplesUrl` / `colors[]`), `reservedColorMessage`, optional `reservedColor` swatch |
+| `indications`                              | Guest notes: `heading`, `children` (`title`, `body`), `guests`, `dressCode` (`description`, optional `examplesUrl` / `colors[]`), `reservedColorMessage`, optional `reservedColors[]` swatches |
 | `interlude`                                | Mid-page image: `image`, `imageAlt`, `caption`                                                                                                                                            |
 | `gift`                                     | Gift block: `heading`, `description`, `holders[]`; either single-bank (`bank`, `accountNumber`, `accountType`) or `accounts[]` (+ optional `email`)                                       |
 | `rsvp.deadline`                            | RSVP deadline copy                                                                                                                                                                        |
@@ -73,7 +73,7 @@ variants with a source-image fallback; audio paths remain public URLs.
 | `music`                             | Shows a play/pause control for the supplied looping audio file |
 | `indications.dressCode.colors`      | Hides the dress-code palette                                   |
 | `indications.dressCode.examplesUrl` | Hides the “examples” link                                      |
-| `indications.reservedColor`         | Uses bridal-white swatch labeled “Reservado”                   |
+| `indications.reservedColors`        | Uses bridal-white swatch labeled “Reservado”                   |
 | `gift.accounts` / `gift.email`      | Uses single-bank card (`bank`, `accountNumber`, `accountType`) |
 
 When `travel` is present, `heading` is required. Example:

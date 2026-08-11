@@ -90,8 +90,8 @@ export interface Wedding {
 			colors?: Array<{ name: string; value: string }>;
 		};
 		reservedColorMessage: string;
-		/** Swatch shown with the reserved-color note. Defaults to bridal white. */
-		reservedColor?: { name: string; value: string };
+		/** Swatches shown with the reserved-color note. Defaults to bridal white. */
+		reservedColors?: Array<{ name: string; value: string }>;
 	};
 	interlude: {
 		image: ImageMetadata;

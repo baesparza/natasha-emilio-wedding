@@ -83,9 +83,11 @@ export const denniseVictor: Wedding = {
 		dressCode: {
 			description: 'Formal.',
 		},
-		reservedColorMessage:
-			'Te pedimos evitar el color cacao; está reservado para las damas de honor.',
-		reservedColor: { name: 'Cacao', value: '#786252' },
+		reservedColorMessage: 'Te recomendamos evitar estos colores; están reservados para la novia y las damas de honor.',
+		reservedColors: [
+			{ name: 'Blanco', value: '#fbf8f1' },
+			{ name: 'Cacao', value: '#786252' },
+		],
 	},
 	interlude: {
 		image: dock,
@@ -106,7 +108,7 @@ export const denniseVictor: Wedding = {
 		],
 	},
 	rsvp: {
-		deadline: 'Confirma tu asistencia hasta el 31 de agosto.',
+		deadline: 'Confirma tu asistencia hasta el 17 de septiembre.',
 	},
 	credits: {
 		text: 'Por Bruno Esparza · Derechos reservados, 2026.',

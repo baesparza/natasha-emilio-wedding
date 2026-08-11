@@ -10,8 +10,10 @@ const { indications } = Astro.props;
 const rules = [indications.children, { title: 'Invitados', body: indications.guests }] as const;
 const dressColors = indications.dressCode.colors ?? [];
 const examplesUrl = indications.dressCode.examplesUrl;
-const reservedSwatch = indications.reservedColor ?? { name: 'Reservado', value: undefined };
-const reservedIsCustom = Boolean(indications.reservedColor);
+const reservedSwatches: Array<{ name: string; value?: string }> = indications.reservedColors ?? [
+	{ name: 'Reservado' },
+];
+const reservedIsCustom = Boolean(indications.reservedColors?.length);
 ---
 
 <!-- Attendance rules -->
@@ -99,28 +101,36 @@ const reservedIsCustom = Boolean(indications.reservedColor);
 		reservedIsCustom ? 'bg-wedding-olive' : 'bg-wedding-lavender',
 	]}
 >
-	<div class="mx-auto flex max-w-md flex-col items-center gap-8 text-center">
+	<div class="mx-auto flex max-w-lg flex-col items-center gap-8 text-center">
 		<p
 			class="font-label text-wedding-surface decoration-wedding-surface text-xl text-balance underline underline-offset-4"
 		>
 			{indications.reservedColorMessage}
 		</p>
-		<figure
-			class="bg-wedding-surface ring-wedding-surface/50 aspect-[3/4] w-32 overflow-hidden shadow-[0_2px_8px_rgba(16,16,16,0.1)] ring-1 sm:w-36"
+		<ul
+			class:list={[
+				'flex flex-wrap justify-center gap-4',
+				reservedSwatches.length > 1 && 'sm:gap-5',
+			]}
 			aria-hidden="true"
 		>
-			<div
-				class:list={['h-[72%] w-full', !reservedIsCustom && 'bg-wedding-bride']}
-				style={reservedIsCustom ? `background-color: ${reservedSwatch.value}` : undefined}
-			>
-			</div>
-			<figcaption class="bg-wedding-surface flex h-[28%] items-center px-3 text-left">
-				<p
-					class="font-label text-wedding-ink-strong text-sm leading-tight font-medium tracking-[0.06em] sm:text-base"
-				>
-					{reservedSwatch.name}
-				</p>
-			</figcaption>
-		</figure>
+			{
+				reservedSwatches.map((swatch) => (
+					<li>
+						<figure class="bg-wedding-surface ring-wedding-surface/50 aspect-[3/4] w-28 overflow-hidden shadow-[0_2px_8px_rgba(16,16,16,0.1)] ring-1 sm:w-32">
+							<div
+								class:list={['h-[72%] w-full', !swatch.value && 'bg-wedding-bride']}
+								style={swatch.value ? `background-color: ${swatch.value}` : undefined}
+							/>
+							<figcaption class="bg-wedding-surface flex h-[28%] items-center px-3 text-left">
+								<p class="font-label text-wedding-ink-strong text-sm leading-tight font-medium tracking-[0.06em] sm:text-base">
+									{swatch.name}
+								</p>
+							</figcaption>
+						</figure>
+					</li>
+				))
+			}
+		</ul>
 	</div>
 </section>
