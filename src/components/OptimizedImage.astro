@@ -1,0 +1,70 @@
+---
+import { getImage, Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	widths: number[];
+	sizes: string;
+	class?: string;
+	pictureClass?: string;
+	loading?: 'eager' | 'lazy';
+	fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+	src,
+	alt,
+	widths,
+	sizes,
+	class: imageClass,
+	pictureClass,
+	loading = 'lazy',
+	fetchpriority = 'auto',
+} = Astro.props;
+
+const placeholder = await getImage({
+	src,
+	width: 24,
+	quality: 25,
+	format: 'webp',
+});
+---
+
+<div
+	data-optimized-image
+	class="bg-cover bg-center"
+	style={`background-image: url("${placeholder.src}")`}
+>
+	<Picture
+		src={src}
+		alt={alt}
+		widths={widths}
+		sizes={sizes}
+		formats={['avif', 'webp']}
+		loading={loading}
+		fetchpriority={fetchpriority}
+		decoding="async"
+		class={`opacity-0 transition-opacity duration-500 ease-out ${imageClass ?? ''}`}
+		pictureAttributes={{ class: pictureClass }}
+	/>
+</div>
+
+<script>
+	import { $$ } from '@/scripts/dom';
+
+	const reveal = (image: HTMLImageElement) => {
+		image.classList.remove('opacity-0');
+		image.classList.add('opacity-100');
+	};
+
+	$$<HTMLImageElement>('[data-optimized-image] img').forEach((image) => {
+		if (image.complete) {
+			reveal(image);
+			return;
+		}
+
+		image.addEventListener('load', () => reveal(image), { once: true });
+	});
+</script>

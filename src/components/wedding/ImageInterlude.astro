@@ -1,5 +1,6 @@
 ---
 import type { Wedding } from '@/content/types';
+import OptimizedImage from '@/components/OptimizedImage.astro';
 
 interface Props {
 	interlude: Wedding['interlude'];
@@ -12,10 +13,13 @@ const { interlude } = Astro.props;
 	<div class="px-gutter mx-auto max-w-5xl">
 		<figure class="relative">
 			<div class="border-wedding-lavender/30 overflow-hidden border">
-				<img
+				<OptimizedImage
 					src={interlude.image}
 					alt={interlude.imageAlt}
-					class="aspect-[5/4] w-full object-cover sm:aspect-[16/10]"
+					class="aspect-5/4 w-full object-cover sm:aspect-16/10"
+					widths={[480, 768, 1024, 1440]}
+					sizes="(min-width: 1024px) 960px, 100vw"
+					pictureClass="block"
 					loading="lazy"
 				/>
 			</div>

@@ -1,6 +1,7 @@
 ---
 import type { Wedding } from '@/content/types';
 import MusicToggle from '@/components/wedding/MusicToggle.astro';
+import OptimizedImage from '@/components/OptimizedImage.astro';
 
 interface Props {
 	hero: Wedding['hero'];
@@ -15,10 +16,13 @@ const { hero, couple, music } = Astro.props;
 	<div class="mx-auto max-w-6xl">
 		{
 			hero.logo && (
-				<img
+				<OptimizedImage
 					src={hero.logo}
 					alt={`Monograma de ${couple.primaryName} y ${couple.secondaryName}`}
 					class="w-20 sm:w-24"
+					widths={[80, 160, 240]}
+					sizes="96px"
+					pictureClass="block"
 				/>
 			)
 		}
@@ -31,10 +35,14 @@ const { hero, couple, music } = Astro.props;
 			<figure
 				class="border-wedding-lavender/30 bg-wedding-surface w-[82%] overflow-hidden border lg:w-full"
 			>
-				<img
+				<OptimizedImage
 					src={hero.image}
 					alt={hero.imageAlt}
 					class="aspect-4/5 h-full w-full object-cover"
+					widths={[480, 720, 960, 1200]}
+					sizes="(min-width: 1024px) 42vw, 82vw"
+					pictureClass="block h-full w-full"
+					loading="eager"
 					fetchpriority="high"
 				/>
 			</figure>

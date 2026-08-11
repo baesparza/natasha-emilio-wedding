@@ -25,9 +25,11 @@ Each wedding is a typed `Wedding` object. The TypeScript contract lives in
 
 ### Adding a wedding
 
-1. Put assets under `public/weddings/<slug>/` (hero, OG, map, interlude, etc.).
-2. Create `src/content/weddings/<slug>.ts` exporting a `Wedding` that satisfies
-   the type.
+1. Put image assets under `src/assets/weddings/<slug>/` (hero, OG, map,
+   interlude, etc.). Keep public files such as audio under
+   `public/weddings/<slug>/`.
+2. Create `src/content/weddings/<slug>.ts`, import its image assets, and export
+   a `Wedding` that satisfies the type.
 3. Register it in `src/content/repository.ts` (add to the `weddings` array).
 4. Preview locally with `?wedding=<slug>` (defaults to `natasha-emilio`).
 
@@ -56,7 +58,8 @@ repository — do not import a specific wedding file from UI code.
 | `rsvp.deadline`                            | RSVP deadline copy                                                                                                                                                                        |
 | `credits.text` / `phone`                   | Footer credit line                                                                                                                                                                        |
 
-Image paths are public URLs (e.g. `/weddings/natasha-emilio/hero.jpg`).
+Image fields use imported Astro assets. They are emitted as responsive AVIF/WebP
+variants with a source-image fallback; audio paths remain public URLs.
 
 ### Optional fields
 
@@ -91,4 +94,3 @@ Tracked code TODOs (keep this list in sync when adding or resolving `TODO` comme
 - [ ] **Add to calendar** (`src/content/calendar.ts`) — “Agregar al calendario” is broken (`data:` ICS download fails on many devices); support Google Calendar / Outlook / Apple plus a reliable `.ics` download
 - [ ] **Astro tag formatting** (`.prettierrc.mjs`) — find a multiline tag-content formatter that does not conflict with Prettier.
 - [ ] **Tenant monograms** (`src/components/wedding/Hero.astro`) — request or create a logo for weddings that do not provide one.
-- [ ] **Efficient images** (`src/content/types.ts`) — serve WebP (or Astro Image) with blur-up placeholders instead of raw public `<img>` URLs.

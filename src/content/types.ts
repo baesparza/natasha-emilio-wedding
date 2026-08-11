@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export interface WeddingTheme {
 	colors: {
 		lavender: string;
@@ -12,7 +14,6 @@ export interface WeddingTheme {
 	};
 }
 
-// TODO: Load images more efficiently — WebP (or Astro Image) with blur-up placeholders instead of raw public `<img>` URLs.
 /** Presentation-facing wedding content contract. Adapters map CMS/local data into this shape. */
 export interface Wedding {
 	slug: string;
@@ -24,16 +25,16 @@ export interface Wedding {
 	seo: {
 		title: string;
 		description: string;
-		ogImage: string;
+		ogImage: ImageMetadata;
 	};
 	theme: WeddingTheme;
 	hero: {
-		image: string;
+		image: ImageMetadata;
 		imageAlt: string;
 		eyebrow: string;
 		headline: string;
 		/** Optional monogram or logo shown above the hero. */
-		logo?: string;
+		logo?: ImageMetadata;
 	};
 	/** Optional background track. Playback begins only after the guest chooses to play it. */
 	music?: {
@@ -58,7 +59,7 @@ export interface Wedding {
 		endsAt: string;
 		ceremonyLabel: string;
 		receptionLabel: string;
-		mapImage: string;
+		mapImage: ImageMetadata;
 		mapUrl: string;
 		/** Individual ceremony/reception locations when the event spans venues. */
 		places?: Array<{
@@ -93,7 +94,7 @@ export interface Wedding {
 		reservedColor?: { name: string; value: string };
 	};
 	interlude: {
-		image: string;
+		image: ImageMetadata;
 		imageAlt: string;
 		caption: string;
 	};

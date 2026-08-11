@@ -2,12 +2,13 @@
 import '../styles/global.css';
 import SmoothScroll from '../islands/SmoothScroll.astro';
 import Seo from '../components/Seo.astro';
+import type { ImageMetadata } from 'astro';
 import type { WeddingTheme } from '@/content/types';
 
 interface Props {
 	title?: string;
 	description?: string;
-	ogImage?: string;
+	ogImage?: ImageMetadata;
 	ogImageAlt?: string;
 	canonicalUrl?: string;
 	lang?: string;

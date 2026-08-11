@@ -1,6 +1,7 @@
 ---
 import { createCalendarUrl } from '@/content/calendar';
 import type { Wedding } from '@/content/types';
+import OptimizedImage from '@/components/OptimizedImage.astro';
 
 interface Props {
 	slug: Wedding['slug'];
@@ -165,10 +166,13 @@ const buttonClass =
 			class="group bg-wedding-lavender relative block aspect-square overflow-hidden focus-visible:outline-offset-4"
 			aria-label={`Ver mapa de ${event.venue} en Google Maps`}
 		>
-			<img
+			<OptimizedImage
 				src={event.mapImage}
 				alt={`Mapa para llegar a ${event.venue}`}
 				class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+				widths={[320, 640, 960]}
+				sizes="(min-width: 1024px) 50vw, 100vw"
+				pictureClass="block h-full w-full"
 				loading="lazy"
 			/>
 		</a>

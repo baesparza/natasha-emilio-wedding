@@ -1,4 +1,9 @@
 import type { Wedding } from '@/content/types';
+import hero from '@/assets/weddings/natasha-emilio/hero.jpg';
+import interlude from '@/assets/weddings/natasha-emilio/interlude.jpg';
+import logo from '@/assets/weddings/natasha-emilio/logo.jpg';
+import map from '@/assets/weddings/natasha-emilio/mapa.png';
+import ogImage from '@/assets/weddings/natasha-emilio/og.jpg';
 
 export const natashaEmilio: Wedding = {
 	slug: 'natasha-emilio',
@@ -11,7 +16,7 @@ export const natashaEmilio: Wedding = {
 		title: 'Natasha & Emilio',
 		description:
 			'Te invitamos a celebrar la boda de Natasha y Emilio el 19 de octubre en El Sauce, Landangui.',
-		ogImage: '/weddings/natasha-emilio/og.jpg',
+		ogImage,
 	},
 	theme: {
 		colors: {
@@ -27,11 +32,11 @@ export const natashaEmilio: Wedding = {
 		},
 	},
 	hero: {
-		image: '/weddings/natasha-emilio/hero.jpg',
+		image: hero,
 		imageAlt: 'Pareja caminando entre árboles al atardecer',
 		eyebrow: '19 · 10 · 2024',
 		headline: 'Todas las bodas tienen una historia, forma parte de ella',
-		logo: '/weddings/natasha-emilio/logo.jpg',
+		logo,
 	},
 	quote: {
 		lead: 'Amamos la vida, no por el hábito de vivir',
@@ -47,7 +52,7 @@ export const natashaEmilio: Wedding = {
 		endsAt: '2024-10-19T23:00:00-05:00',
 		ceremonyLabel: 'Ceremonia · 4:00 PM',
 		receptionLabel: 'Recepción · 5:30 PM',
-		mapImage: '/weddings/natasha-emilio/mapa.png',
+		mapImage: map,
 		mapUrl: 'https://maps.app.goo.gl/hTtNPkG9gy8kPds87',
 		travel: {
 			heading: 'Cómo llegar y hospedaje',
@@ -79,7 +84,7 @@ export const natashaEmilio: Wedding = {
 		reservedColorMessage: 'Estamos reservando el blanco y parecidos solo para la novia.',
 	},
 	interlude: {
-		image: '/weddings/natasha-emilio/interlude.jpg',
+		image: interlude,
 		imageAlt: 'Ceremonia al aire libre rodeada de montañas',
 		caption: 'Una tarde para reunirnos, celebrar y quedarnos con la historia.',
 	},

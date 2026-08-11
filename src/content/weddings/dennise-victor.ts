@@ -1,4 +1,8 @@
 import type { Wedding } from '@/content/types';
+import closeup from '@/assets/weddings/dennise-victor/photo-closeup.png';
+import dock from '@/assets/weddings/dennise-victor/photo-dock.png';
+import gazebo from '@/assets/weddings/dennise-victor/photo-gazebo.png';
+import map from '@/assets/weddings/dennise-victor/mapa.png';
 
 export const denniseVictor: Wedding = {
 	slug: 'dennise-victor',
@@ -11,7 +15,7 @@ export const denniseVictor: Wedding = {
 		title: 'Dennise & Victor',
 		description:
 			'Te invitamos a celebrar la boda de Dennise y Victor el sábado 17 de octubre de 2026 en Cuenca.',
-		ogImage: '/weddings/dennise-victor/photo-closeup.png',
+		ogImage: closeup,
 	},
 	theme: {
 		colors: {
@@ -27,7 +31,7 @@ export const denniseVictor: Wedding = {
 		},
 	},
 	hero: {
-		image: '/weddings/dennise-victor/photo-gazebo.png',
+		image: gazebo,
 		imageAlt: 'Dennise y Victor tomados de las manos frente al lago',
 		eyebrow: '17 · 10 · 2026',
 		headline: 'Sí quiero, para toda la vida',
@@ -50,7 +54,7 @@ export const denniseVictor: Wedding = {
 		endsAt: '2026-10-18T00:00:00-05:00',
 		ceremonyLabel: 'Ceremonia · 5:00 PM',
 		receptionLabel: 'Recepción · 8:00 PM',
-		mapImage: '/weddings/dennise-victor/mapa.png',
+		mapImage: map,
 		mapUrl: 'https://maps.app.goo.gl/dM4C9KFKtkvVEXUd7',
 		places: [
 			{
@@ -84,7 +88,7 @@ export const denniseVictor: Wedding = {
 		reservedColor: { name: 'Cacao', value: '#786252' },
 	},
 	interlude: {
-		image: '/weddings/dennise-victor/photo-dock.png',
+		image: dock,
 		imageAlt: 'Dennise y Victor sentados juntos frente a un lago',
 		caption: 'Una tarde para reunirnos, celebrar y quedarnos con la historia.',
 	},
