@@ -4,7 +4,9 @@ import type { Wedding } from '@/content/types';
 // - Format DTSTART/DTEND as proper UTC (or VTIMEZONE) instead of stripping the offset
 // - Add DESCRIPTION, URL, and GEO when available
 // - Escape ICS special characters in SUMMARY/LOCATION
-// TODO: Add direct “add to calendar” links (Google Calendar, Outlook, Apple) alongside the .ics download
+// TODO: “Agregar al calendario” is broken — data:text/calendar download fails on many
+// devices/browsers. Support multiple formats/providers (Google Calendar, Outlook, Apple)
+// alongside a reliable .ics download.
 
 // Strips timezone offset; UTC/VTIMEZONE handling is tracked in the TODOs above
 function formatIcsDate(value: string): string {
