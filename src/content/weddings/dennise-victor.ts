@@ -95,9 +95,9 @@ export const denniseVictor: Wedding = {
 		caption: 'Una tarde para reunirnos, celebrar y quedarnos con la historia.',
 	},
 	gift: {
-		heading: 'Si deseas obsequiarnos algo, lo recibiremos con mucho cariño',
+		heading: 'Tu presencia es el mejor regalo, pero…',
 		description:
-			'Para tu comodidad puedes realizarlo mediante sobre cerrado o cualquiera de las siguientes cuentas.',
+			'Si quieres hacernos un detalle, estamos agradecidos. Para tu comodidad puedes realizarlo mediante sobre cerrado o cualquiera de las siguientes cuentas.',
 		holders: [{ name: 'Víctor Hugo Feijóo Romero', id: 'CI: 0707106381' }],
 		email: 'yugo_16_96@hotmail.com',
 		accounts: [
