@@ -26,18 +26,18 @@ smooth but restrained motion.
 
 ## Content and CMS Strategy
 
-Build the first site with **local typed content and local image paths**.
+**Wedding invitations live in git** as typed files under `src/content/weddings/`.
 All presentation components must consume a stable `Wedding` content interface,
-not import a particular data source directly.
-
-Sanity is intentionally deferred until the final integration phase. It will
-become the source of truth for wedding content, image assets, and RSVP records.
-When Sanity is added, replace only the content/repository adapters; do not
-rewrite the page components or their public data contracts.
+not import a particular data source directly. Swap only the content/repository
+adapters if the source changes; do not rewrite page components or their public
+data contracts.
 
 Keep content tenant-scoped: a wedding has a slug, names, branding, sections,
-media, SEO data, and RSVP configuration. RSVP records must always reference
-their wedding.
+media, SEO data, and RSVP configuration. **RSVP records live in Neon Postgres**
+and must always reference their wedding slug. `DATABASE_URL` stays on the
+server (`/api/rsvp`). The couple reviews replies at `/confirmaciones`, gated
+by `RSVP_VIEW_SECRET` (cookie; never `PUBLIC_`). Do not expose either secret
+to browser code or link the list from the public invitation.
 
 ## Design and Implementation Rules
 
@@ -89,8 +89,8 @@ Work in reviewable phases and stop after each phase for approval:
 5. GSAP and Lenis motion
 6. RSVP UI and persistence boundary
 7. Theme variations and second-wedding smoke test
-8. Sanity integration, then Vercel deployment
+8. Vercel deployment (apex + wildcard DNS)
 
-Do not introduce Sanity, a new database, production credentials, or DNS changes
-before the final integration/deployment phase unless the user explicitly
-changes this order.
+RSVP persistence is Neon. Production deploy is allowed when the user asks for
+it; still do not add wildcard DNS until that hosting pass. Set `DATABASE_URL`
+and `RSVP_VIEW_SECRET` on the host, never in git.

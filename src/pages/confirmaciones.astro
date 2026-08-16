@@ -1,0 +1,165 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getWeddingBySlug } from '@/content/repository';
+import {
+	getRsvpViewSecret,
+	grantRsvpView,
+	isRsvpViewer,
+	revokeRsvpView,
+	secretsEqual,
+} from '@/server/rsvp-auth';
+import { listRsvpsForWedding, rsvpsToCsv } from '@/server/rsvps';
+
+export const prerender = false;
+
+const requested = Astro.url.searchParams.get('wedding');
+const slug = requested ?? 'dennise-victor';
+const wedding = getWeddingBySlug(slug);
+
+if (!wedding)
+	return new Response('No encontramos esta boda.', {
+		status: 404,
+		headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+	});
+
+const coupleLabel = `${wedding.couple.primaryName} & ${wedding.couple.secondaryName}`;
+Astro.response.headers.set('Cache-Control', 'no-store');
+const secret = getRsvpViewSecret();
+const listPath = `/confirmaciones?wedding=${encodeURIComponent(wedding.slug)}`;
+const invitationPath = `/?wedding=${encodeURIComponent(wedding.slug)}`;
+const secure = Astro.url.protocol === 'https:';
+
+if (Astro.url.searchParams.has('logout')) {
+	revokeRsvpView(Astro.cookies);
+	return Astro.redirect(listPath);
+}
+
+let passwordError = '';
+if (Astro.request.method === 'POST') {
+	const form = await Astro.request.formData();
+	const password = String(form.get('password') ?? '');
+	if (secret && password && secretsEqual(password, secret)) {
+		grantRsvpView(Astro.cookies, secret, secure);
+		return Astro.redirect(listPath, 303);
+	}
+	passwordError = 'La contraseña no es correcta.';
+}
+
+const authorized = Boolean(secret) && isRsvpViewer(Astro.cookies);
+const rows = authorized ? await listRsvpsForWedding(wedding.slug) : undefined;
+const confirmations = rows ?? [];
+
+if (authorized && rows && Astro.url.searchParams.get('download') === 'csv') {
+	const filename = `confirmaciones-${wedding.slug}.csv`;
+	return new Response(rsvpsToCsv(rows), {
+		headers: {
+			'Content-Type': 'text/csv; charset=utf-8',
+			'Content-Disposition': `attachment; filename="${filename}"`,
+			'Cache-Control': 'no-store',
+		},
+	});
+}
+
+function formatWhen(date: Date) {
+	return date.toLocaleString('es-EC', {
+		dateStyle: 'medium',
+		timeStyle: 'short',
+		timeZone: 'America/Guayaquil',
+	});
+}
+
+function confirmationLabel(count: number) {
+	return count === 1 ? '1 confirmación' : `${count} confirmaciones`;
+}
+---
+
+<BaseLayout
+	title={`Confirmaciones · ${coupleLabel}`}
+	description={`Lista de confirmaciones para ${coupleLabel}.`}
+	lang={wedding.locale}
+	theme={wedding.theme}
+	noindex
+>
+	<section class="bg-wedding-surface py-section min-h-svh">
+		<div class="px-gutter mx-auto max-w-2xl">
+			<p class="text-wedding-ink-muted text-sm tracking-[0.14em] uppercase">{coupleLabel}</p>
+			<h1 class="font-script text-wedding-ink-muted mt-3 text-6xl leading-none">Confirmaciones</h1>
+
+			{
+				!secret ? (
+					<p class="text-wedding-ink-muted mt-10 text-base">
+						Esta lista no está configurada todavía.
+					</p>
+				) : !authorized ? (
+					<form method="post" action={listPath} class="mt-10 grid max-w-md gap-5">
+						<div>
+							<label class="text-sm font-semibold" for="rsvp-view-password"> Contraseña </label>
+							<input
+								id="rsvp-view-password"
+								name="password"
+								type="password"
+								autocomplete="current-password"
+								required
+								class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
+							/>
+						</div>
+						{passwordError && (
+							<p class="text-sm text-red-800" role="alert">
+								{passwordError}
+							</p>
+						)}
+						<button
+							type="submit"
+							class="border-wedding-rosewood text-wedding-ink-muted hover:bg-wedding-lavender hover:text-wedding-surface justify-self-start border px-7 py-4 text-sm font-semibold tracking-[0.14em] uppercase"
+						>
+							Entrar
+						</button>
+					</form>
+				) : rows === undefined ? (
+					<p class="text-wedding-ink-muted mt-10 text-base">
+						Las confirmaciones no están disponibles todavía.
+					</p>
+				) : (
+					<div class="mt-10">
+						<p class="text-wedding-ink-muted text-base">
+							{confirmationLabel(confirmations.length)}
+						</p>
+						<div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+							<a
+								class="text-wedding-rosewood underline-offset-4 hover:underline"
+								href={`${listPath}&download=csv`}
+							>
+								Descargar CSV
+							</a>
+							<a
+								class="text-wedding-rosewood underline-offset-4 hover:underline"
+								href={invitationPath}
+							>
+								Invitación
+							</a>
+							<a
+								class="text-wedding-rosewood underline-offset-4 hover:underline"
+								href={`${listPath}&logout=1`}
+							>
+								Salir
+							</a>
+						</div>
+						{confirmations.length === 0 ? (
+							<p class="text-wedding-ink-muted mt-10 text-base">Aún no hay confirmaciones.</p>
+						) : (
+							<ul class="divide-wedding-beige border-wedding-beige mt-10 divide-y border-y">
+								{confirmations.map((row) => (
+									<li class="py-5">
+										<p class="text-wedding-ink-strong text-lg font-medium">{row.name}</p>
+										<p class="text-wedding-ink-muted mt-1 text-sm">{row.phone}</p>
+										<p class="text-wedding-ink-muted mt-1 text-sm">{formatWhen(row.createdAt)}</p>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
+				)
+			}
+		</div>
+	</section>
+</BaseLayout>

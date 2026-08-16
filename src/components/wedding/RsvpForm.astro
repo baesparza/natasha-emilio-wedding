@@ -2,10 +2,11 @@
 import type { Wedding } from '@/content/types';
 
 interface Props {
+	slug: Wedding['slug'];
 	rsvp: Wedding['rsvp'];
 }
 
-const { rsvp } = Astro.props;
+const { slug, rsvp } = Astro.props;
 ---
 
 <section id="rsvp" class="bg-wedding-surface py-section scroll-mt-6" aria-labelledby="rsvp-title">
@@ -23,7 +24,13 @@ const { rsvp } = Astro.props;
 		</h2>
 		<p class="text-wedding-ink-muted mt-10 text-base" data-reveal>{rsvp.deadline}</p>
 
-		<form id="rsvp-form" class="mx-auto mt-8 grid max-w-xl gap-5 text-left" novalidate data-reveal>
+		<form
+			id="rsvp-form"
+			class="mx-auto mt-8 grid max-w-xl gap-5 text-left"
+			novalidate
+			data-reveal
+			data-wedding-slug={slug}
+		>
 			<div>
 				<label class="text-sm font-semibold" for="rsvp-name"> Nombre completo </label>
 				<input
@@ -35,34 +42,18 @@ const { rsvp } = Astro.props;
 					class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
 				/>
 			</div>
-			<div class="grid gap-5 sm:grid-cols-2">
-				<div>
-					<label class="text-sm font-semibold" for="rsvp-phone"> Teléfono </label>
-					<input
-						id="rsvp-phone"
-						name="phone"
-						type="tel"
-						inputmode="tel"
-						autocomplete="tel"
-						required
-						aria-describedby="rsvp-error"
-						class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
-					/>
-				</div>
-				<div>
-					<label class="text-sm font-semibold" for="rsvp-guests"> Número de asistentes </label>
-					<input
-						id="rsvp-guests"
-						name="guests"
-						type="number"
-						min="1"
-						max="10"
-						value="1"
-						required
-						aria-describedby="rsvp-error"
-						class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
-					/>
-				</div>
+			<div>
+				<label class="text-sm font-semibold" for="rsvp-phone"> Teléfono </label>
+				<input
+					id="rsvp-phone"
+					name="phone"
+					type="tel"
+					inputmode="tel"
+					autocomplete="tel"
+					required
+					aria-describedby="rsvp-error"
+					class="border-wedding-rosewood bg-wedding-surface mt-2 w-full border px-4 py-3 text-base"
+				/>
 			</div>
 			<p id="rsvp-error" class="hidden text-sm text-red-800" role="alert"></p>
 			<p
@@ -82,7 +73,7 @@ const { rsvp } = Astro.props;
 	</div>
 </section>
 
-<!-- Validation + persistence boundary (no write until RSVP backend is wired) -->
+<!-- Validation + Neon persistence via /api/rsvp -->
 <script>
 	import { $ } from '@/scripts/dom';
 	import { saveRsvpSubmission } from '@/scripts/rsvp';
@@ -92,36 +83,47 @@ const { rsvp } = Astro.props;
 	const success = $<HTMLParagraphElement>('#rsvp-success');
 	const nameInput = $<HTMLInputElement>('#rsvp-name');
 	const phoneInput = $<HTMLInputElement>('#rsvp-phone');
-	const guestsInput = $<HTMLInputElement>('#rsvp-guests');
+	const submitButton = $<HTMLButtonElement>('#rsvp-form button[type="submit"]');
 
-	form?.addEventListener('submit', async (event) => {
-		event.preventDefault();
-		const name = nameInput?.value.trim() ?? '';
-		const phone = phoneInput?.value.replace(/\D/g, '') ?? '';
-		const guests = Number(guestsInput?.value ?? 0);
-		const message =
-			name.length < 3
-				? 'Completa tu nombre para confirmar.'
-				: phone.length < 7
-					? 'Ingresa un teléfono válido para confirmar.'
-					: guests < 1
-						? 'Indica cuántas personas asistirán.'
+	if (form)
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const name = nameInput?.value.trim() ?? '';
+			const phone = phoneInput?.value.replace(/\D/g, '') ?? '';
+			const weddingSlug = form.dataset.weddingSlug ?? '';
+			const message =
+				name.length < 3
+					? 'Completa tu nombre para confirmar.'
+					: phone.length < 7
+						? 'Ingresa un teléfono válido para confirmar.'
 						: '';
 
-		if (error) {
-			error.textContent = message;
-			error.classList.toggle('hidden', !message);
-		}
+			if (error) {
+				error.textContent = message;
+				error.classList.toggle('hidden', !message);
+			}
 
-		for (const input of [nameInput, phoneInput, guestsInput])
-			input?.setAttribute('aria-invalid', String(Boolean(message)));
+			for (const input of [nameInput, phoneInput])
+				input?.setAttribute('aria-invalid', String(Boolean(message)));
 
-		if (message || !success) return;
+			if (message || !success) return;
 
-		await saveRsvpSubmission({ name, phone, guests });
-		success.textContent =
-			'Tu confirmación está lista para guardarse. La conexión de RSVP se activará próximamente.';
-		success.classList.remove('hidden');
-		form.reset();
-	});
+			success.classList.add('hidden');
+			if (submitButton) submitButton.disabled = true;
+
+			try {
+				await saveRsvpSubmission({ weddingSlug, name, phone });
+				success.textContent = '¡Gracias! Recibimos tu confirmación.';
+				success.classList.remove('hidden');
+				form.reset();
+			} catch (err) {
+				if (error) {
+					error.textContent =
+						err instanceof Error ? err.message : 'No se pudo guardar la confirmación.';
+					error.classList.remove('hidden');
+				}
+			} finally {
+				if (submitButton) submitButton.disabled = false;
+			}
+		});
 </script>

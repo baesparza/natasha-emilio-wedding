@@ -31,32 +31,53 @@ Each wedding is a typed `Wedding` object. The TypeScript contract lives in
 2. Create `src/content/weddings/<slug>.ts`, import its image assets, and export
    a `Wedding` that satisfies the type.
 3. Register it in `src/content/repository.ts` (add to the `weddings` array).
-4. Preview locally with `?wedding=<slug>` (defaults to `natasha-emilio`).
+4. Preview locally with `?wedding=<slug>` (defaults to `dennise-victor`).
 
 Presentation components only consume the `Wedding` interface via the
 repository — do not import a specific wedding file from UI code.
 
+## RSVPs
+
+Guest confirmations `POST` to `/api/rsvp` and are stored in **Neon Postgres**.
+Wedding copy stays in git; only RSVPs use the database.
+
+Guests submit **name and phone only**. The couple reviews replies at
+`/confirmaciones?wedding=<slug>`. That page is password-protected with
+`RSVP_VIEW_SECRET` and is not linked from the invitation. It is `noindex`.
+Download CSV from there when you need a sheet.
+
+1. Create a free project at [neon.tech](https://neon.tech).
+2. Copy `.env.example` to `.env`. Set `DATABASE_URL` to the **pooled**
+   connection string and `RSVP_VIEW_SECRET` to a long shared password
+   (never prefix either with `PUBLIC_`).
+3. In the Neon SQL editor, run [`src/server/migrations/001_rsvps.sql`](src/server/migrations/001_rsvps.sql).
+4. `npm run dev`, submit the form, then open
+   `/confirmaciones?wedding=dennise-victor` and enter the password.
+
+Without `DATABASE_URL` the form shows an error instead of a fake success.
+Without `RSVP_VIEW_SECRET` the list stays closed.
+
 ### Required fields
 
-| Field                                      | Purpose                                                                                                                                                                                   |
-| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `slug`                                     | Tenant id (URL query / future subdomain)                                                                                                                                                  |
-| `locale`                                   | HTML `lang` (e.g. `es`)                                                                                                                                                                   |
-| `couple.primaryName` / `secondaryName`     | Names shown in hero and event details                                                                                                                                                     |
-| `seo.title` / `description` / `ogImage`    | Meta + Open Graph                                                                                                                                                                         |
-| `theme.colors`                             | Palette CSS tokens (`lavender`, `rosewood`, `beige`, `olive`, `bride`, `ink`, `inkMuted`, `inkStrong`, `surface`)                                                                         |
-| `hero`                                     | Full-bleed opener: `image`, `imageAlt`, `eyebrow`, `headline`, optional `logo`                                                                                                            |
-| `quote.lead` / `close`                     | Two-part quote block                                                                                                                                                                      |
-| `event.invitationLead` / `invitationClose` | Invitation copy                                                                                                                                                                           |
-| `event.venue` / `address`                  | Location labels                                                                                                                                                                           |
-| `event.dateLabel`                          | Display date string                                                                                                                                                                       |
-| `event.startsAt` / `endsAt`                | ISO datetimes for calendar + structured data                                                                                                                                              |
-| `event.ceremonyLabel` / `receptionLabel`   | Time lines under date                                                                                                                                                                     |
+| Field                                      | Purpose                                                                                                                                                                                        |
+| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`                                     | Tenant id (URL query / future subdomain)                                                                                                                                                       |
+| `locale`                                   | HTML `lang` (e.g. `es`)                                                                                                                                                                        |
+| `couple.primaryName` / `secondaryName`     | Names shown in hero and event details                                                                                                                                                          |
+| `seo.title` / `description` / `ogImage`    | Meta + Open Graph                                                                                                                                                                              |
+| `theme.colors`                             | Palette CSS tokens (`lavender`, `rosewood`, `beige`, `olive`, `bride`, `ink`, `inkMuted`, `inkStrong`, `surface`)                                                                              |
+| `hero`                                     | Full-bleed opener: `image`, `imageAlt`, `eyebrow`, `headline`, optional `logo`                                                                                                                 |
+| `quote.lead` / `close`                     | Two-part quote block                                                                                                                                                                           |
+| `event.invitationLead` / `invitationClose` | Invitation copy                                                                                                                                                                                |
+| `event.venue` / `address`                  | Location labels                                                                                                                                                                                |
+| `event.dateLabel`                          | Display date string                                                                                                                                                                            |
+| `event.startsAt` / `endsAt`                | ISO datetimes for calendar + structured data                                                                                                                                                   |
+| `event.ceremonyLabel` / `receptionLabel`   | Time lines under date                                                                                                                                                                          |
 | `indications`                              | Guest notes: `heading`, `children` (`title`, `body`), `guests`, `dressCode` (`description`, optional `examplesUrl` / `colors[]`), `reservedColorMessage`, optional `reservedColors[]` swatches |
-| `interlude`                                | Mid-page image: `image`, `imageAlt`, `caption`                                                                                                                                            |
-| `gift`                                     | Gift block: `heading`, `description`, `holders[]`; either single-bank (`bank`, `accountNumber`, `accountType`) or `accounts[]` (+ optional `email`)                                       |
-| `rsvp.deadline`                            | RSVP deadline copy                                                                                                                                                                        |
-| `credits.text` / `phone`                   | Footer credit line                                                                                                                                                                        |
+| `interlude`                                | Mid-page image: `image`, `imageAlt`, `caption`                                                                                                                                                 |
+| `gift`                                     | Gift block: `heading`, `description`, `holders[]`; either single-bank (`bank`, `accountNumber`, `accountType`) or `accounts[]` (+ optional `email`)                                            |
+| `rsvp.deadline`                            | RSVP deadline copy                                                                                                                                                                             |
+| `credits.text` / `phone`                   | Footer credit line                                                                                                                                                                             |
 
 Image fields use imported Astro assets. They are emitted as responsive AVIF/WebP
 variants with a source-image fallback; audio paths remain public URLs.
