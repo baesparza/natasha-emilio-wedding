@@ -87,6 +87,7 @@ export const denniseVictor: Wedding = {
 		reservedColors: [
 			{ name: 'Blanco', value: '#fbf8f1' },
 			{ name: 'Cacao', value: '#786252' },
+			{ name: 'Rojo', value: '#b91c1c' },
 		],
 	},
 	interlude: {
